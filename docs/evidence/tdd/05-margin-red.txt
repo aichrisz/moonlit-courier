@@ -1,0 +1,53 @@
+✔ jump leaves spawn and lands safely; snapshots detached (16.23449ms)
+✔ fixed input simulation deterministic and invalid time rejected (14.21832ms)
+✔ ordinary witness level 1, timing margin -1 (38.319534ms)
+✔ ordinary witness level 1, timing margin 0 (15.318286ms)
+✔ ordinary witness level 1, timing margin 1 (10.322098ms)
+✔ ordinary witness level 2, timing margin -1 (19.126786ms)
+✔ ordinary witness level 2, timing margin 0 (9.820495ms)
+✖ ordinary witness level 2, timing margin 1 (16.25989ms)
+✔ ordinary witness level 3, timing margin -1 (26.480468ms)
+✔ ordinary witness level 3, timing margin 0 (9.03061ms)
+✔ ordinary witness level 3, timing margin 1 (14.554481ms)
+✔ every checkpoint is safe for idle respawn and long mixed input stays finite (240.364063ms)
+✔ three distinct authored worlds with 2 required + 1 scenic each (0.457043ms)
+✔ required delivery is not locked by absent scenic letter (6.612877ms)
+✔ 100ms coyote jump after walking off edge (3.900702ms)
+✔ 120ms buffered jump is consumed on landing, not held autojump (6.124474ms)
+✔ single horizontal air dash suspends gravity and refills only on landing (2.284452ms)
+✔ thin hazards and walls cannot be tunneled at maximum accepted dt (1.729009ms)
+✔ moving platform carries grounded passenger and underside stops ascent (1.951651ms)
+✔ physical checkpoint and letters survive death; exit completion idempotent (11.002182ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 19
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 706.66203
+
+✖ failing tests:
+
+test at tests/levels.test.cjs:5:50
+✖ ordinary witness level 2, timing margin 1 (16.25989ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'playing'
+  - 'level-complete'
+  
+      at TestContext.<anonymous> (/root/projects/moonlit-courier/.worktrees/v1/tests/levels.test.cjs:6:66)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'playing',
+    expected: 'level-complete',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

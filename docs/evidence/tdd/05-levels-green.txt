@@ -1,0 +1,28 @@
+✔ jump leaves spawn and lands safely; snapshots detached (10.347938ms)
+✔ fixed input simulation deterministic and invalid time rejected (5.829912ms)
+✔ ordinary witness level 1, timing margin -1 (34.261791ms)
+✔ ordinary witness level 1, timing margin 0 (13.493596ms)
+✔ ordinary witness level 1, timing margin 1 (9.338692ms)
+✔ ordinary witness level 2, timing margin -1 (18.125861ms)
+✔ ordinary witness level 2, timing margin 0 (9.628014ms)
+✔ ordinary witness level 2, timing margin 1 (8.446728ms)
+✔ ordinary witness level 3, timing margin -1 (31.613457ms)
+✔ ordinary witness level 3, timing margin 0 (12.848712ms)
+✔ ordinary witness level 3, timing margin 1 (11.504824ms)
+✔ every checkpoint is safe for idle respawn and long mixed input stays finite (157.729842ms)
+✔ three distinct authored worlds with 2 required + 1 scenic each (0.359882ms)
+✔ required delivery is not locked by absent scenic letter (4.049903ms)
+✔ 100ms coyote jump after walking off edge (3.896342ms)
+✔ 120ms buffered jump is consumed on landing, not held autojump (3.510499ms)
+✔ single horizontal air dash suspends gravity and refills only on landing (3.254498ms)
+✔ thin hazards and walls cannot be tunneled at maximum accepted dt (1.393048ms)
+✔ moving platform carries grounded passenger and underside stops ascent (3.770901ms)
+✔ physical checkpoint and letters survive death; exit completion idempotent (10.87242ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 577.740069

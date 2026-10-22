@@ -1,0 +1,76 @@
+✔ 100ms coyote jump after walking off edge (2.122092ms)
+✔ 120ms buffered jump is consumed on landing, not held autojump (1.938411ms)
+✔ single horizontal air dash suspends gravity and refills only on landing (0.585124ms)
+✖ thin hazards and walls cannot be tunneled at maximum accepted dt (1.276727ms)
+✖ moving platform carries grounded passenger and underside stops ascent (0.474923ms)
+✖ physical checkpoint and letters survive death; exit completion idempotent (2.155052ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 3
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 93.853366
+
+✖ failing tests:
+
+test at tests/physics.test.cjs:23:1
+✖ thin hazards and walls cannot be tunneled at maximum accepted dt (1.276727ms)
+  AssertionError [ERR_ASSERTION]: crossed hazard must respawn exactly once
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (/root/projects/moonlit-courier/.worktrees/v1/tests/physics.test.cjs:29:9)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/physics.test.cjs:31:1
+✖ moving platform carries grounded passenger and underside stops ascent (0.474923ms)
+  AssertionError [ERR_ASSERTION]: passenger must travel with lift
+      at TestContext.<anonymous> (/root/projects/moonlit-courier/.worktrees/v1/tests/physics.test.cjs:33:38)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/physics.test.cjs:37:1
+✖ physical checkpoint and letters survive death; exit completion idempotent (2.155052ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  null !== 'safe'
+  
+      at TestContext.<anonymous> (/root/projects/moonlit-courier/.worktrees/v1/tests/physics.test.cjs:39:32)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: 'safe',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

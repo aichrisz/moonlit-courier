@@ -1,0 +1,16 @@
+✔ jump leaves spawn and lands safely; snapshots detached (8.039205ms)
+✔ fixed input simulation deterministic and invalid time rejected (3.896862ms)
+✔ 100ms coyote jump after walking off edge (3.821262ms)
+✔ 120ms buffered jump is consumed on landing, not held autojump (5.035868ms)
+✔ single horizontal air dash suspends gravity and refills only on landing (2.737816ms)
+✔ thin hazards and walls cannot be tunneled at maximum accepted dt (1.73837ms)
+✔ moving platform carries grounded passenger and underside stops ascent (1.75629ms)
+✔ physical checkpoint and letters survive death; exit completion idempotent (8.889529ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 202.829576

@@ -1,0 +1,31 @@
+✖ three distinct authored worlds with 2 required + 1 scenic each (1.71701ms)
+✔ required delivery is not locked by absent scenic letter (14.24672ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 1
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 93.726885
+
+✖ failing tests:
+
+test at tests/levels.test.cjs:4:1
+✖ three distinct authored worlds with 2 required + 1 scenic each (1.71701ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  1 !== 3
+  
+      at TestContext.<anonymous> (/root/projects/moonlit-courier/.worktrees/v1/tests/levels.test.cjs:5:9)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.start (node:internal/test_runner/test:1257:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 3,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
