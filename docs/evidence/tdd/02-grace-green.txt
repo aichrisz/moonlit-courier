@@ -1,0 +1,12 @@
+✔ jump leaves spawn and lands safely; snapshots detached (3.732861ms)
+✔ fixed input simulation deterministic and invalid time rejected (2.224252ms)
+✔ 100ms coyote jump after walking off edge (1.948331ms)
+✔ 120ms buffered jump is consumed on landing, not held autojump (2.058411ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 161.622506

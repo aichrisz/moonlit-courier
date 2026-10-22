@@ -1,0 +1,46 @@
+✖ 100ms coyote jump after walking off edge (1.998732ms)
+✖ 120ms buffered jump is consumed on landing, not held autojump (1.278647ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 0
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 77.074712
+
+✖ failing tests:
+
+test at tests/physics.test.cjs:5:1
+✖ 100ms coyote jump after walking off edge (1.998732ms)
+  AssertionError [ERR_ASSERTION]: coyote jump must rise
+      at TestContext.<anonymous> (/root/projects/moonlit-courier/.worktrees/v1/tests/physics.test.cjs:7:103)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.start (node:internal/test_runner/test:1257:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/physics.test.cjs:9:1
+✖ 120ms buffered jump is consumed on landing, not held autojump (1.278647ms)
+  AssertionError [ERR_ASSERTION]: buffer must survive until landing
+      at TestContext.<anonymous> (/root/projects/moonlit-courier/.worktrees/v1/tests/physics.test.cjs:14:9)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
