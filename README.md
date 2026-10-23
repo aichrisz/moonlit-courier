@@ -32,7 +32,9 @@ Tested toolchain: Node 26.7.0, npm 11.19.0, Python standard library. Dev-only pi
 - `npm run verify`: check → build → export → unit → browser → online npm audit. Network is needed for the audit, not gameplay.
 - `npm run package`: deterministic source ZIP and integrity report, only from an exact committed source manifest. Commit all intended source and `source-files.json` first; dirty/missing/unexpected source is refused.
 
-Outputs are under `artifacts/` and `dist/`, not committed. ZIP entries exactly match `source-files.json` and committed bytes; parent-owned untracked acceptance files, dependencies, Git metadata, artifacts and private files are excluded. The package helper refuses symlinks, including dangling links and ancestors. The helpers assume a single local writer, not an adversarial concurrent filesystem.
+Outputs are under `artifacts/` and `dist/`, not committed. ZIP entries exactly match `source-files.json` and committed bytes; portable parent-owned `tests/acceptance` checks are included, while temporary/untracked scratch, dependencies, Git metadata, artifacts and private files are excluded. The package helper refuses symlinks, including dangling links and ancestors. The helpers assume a single local writer, not an adversarial concurrent filesystem.
+
+`docs/verification.md` documents the independent parent protocol and reproducible `tests/acceptance` commands. Their geometry-derived native routes are separate from the implementation witnesses below. Actual release verdict/model/fingerprints and final publication provenance are separate attestations, not assertions manufactured in the source code.
 
 ## Evidence and limits
 
