@@ -1,0 +1,26 @@
+✔ bounded versioned records reject corrupt, hostile, foreign and out-of-range values (1.392208ms)
+✔ completion keeps best, bonus and unlock bounded; duplicate cannot increment (1.590369ms)
+✖ read and write denial are separate truthful outcomes (0.662924ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 2
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 81.028333
+
+✖ failing tests:
+
+test at tests/records.test.cjs:19:1
+✖ read and write denial are separate truthful outcomes (0.662924ms)
+  Error: denied read
+      at Object.getItem (/root/projects/moonlit-courier/.worktrees/v1/tests/records.test.cjs:20:35)
+      at Object.load (/root/projects/moonlit-courier/.worktrees/v1/records.js:13:42)
+      at TestContext.<anonymous> (/root/projects/moonlit-courier/.worktrees/v1/tests/records.test.cjs:21:17)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7)

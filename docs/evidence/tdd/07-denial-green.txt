@@ -1,0 +1,11 @@
+✔ bounded versioned records reject corrupt, hostile, foreign and out-of-range values (1.380848ms)
+✔ completion keeps best, bonus and unlock bounded; duplicate cannot increment (1.87421ms)
+✔ read and write denial are separate truthful outcomes (0.732084ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 78.083716
