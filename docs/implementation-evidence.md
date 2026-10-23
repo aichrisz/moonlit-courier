@@ -1,6 +1,14 @@
 # Implementation verification evidence
 
-Status: all implementation work is present; final full verification and exact-source packaging are being executed. This is a local candidate, not independent parent acceptance or a deployed release.
+Status: complete local implementation and verified delivery artifacts, pending independent parent acceptance/review/publication. No deployed release or independent ship verdict is claimed.
+
+## Final full verification
+
+`npm run verify` exited 0. It ran the real source check (80 manifest files, 25 JavaScript syntax checks, 8 runtime files), build, export, all unit/browser tests and online audit. Unit: **48 passed, 0 failed/skipped/todo**. Playwright: **16 passed, 0 unexpected/skipped/flaky**, in the full 9.0-minute run. Online `npm audit --audit-level=low`: **0 vulnerabilities**. This supersedes historical targeted reports.
+
+Each source/build/offline native campaign collected nine unique letters and reached all three exits with zero deaths. Offline used `context.setOffline(true)` before file navigation; no adjacent or external request occurred, and computed `:root` background and canvas fit were asserted. Browser screenshot/geometry cases covered 320×568, 390×844, 768×1024, 1366×768 and 1440×900 at DPR2, in all four UI phases. Axe reported no tested WCAG-tag violations in ready/playing/paused/results.
+
+`npm run package` exited 0 after source/manifest commit, verifying **80 committed files**, identical source/HEAD/ZIP bytes and a read-back integrity report. The package is regenerated after final documentation-only commits; `package.json` in artifacts/evidence and `final-report.json` bind the resulting ZIP to the actual final HEAD. Browser-tested runtime bytes remain unchanged by that documentation finalization. `git diff --check` passed. The owned localhost test-server port was verified closed. Parent-reserved files remain untracked and untouched.
 
 ## Executed targeted checks
 
