@@ -1,0 +1,182 @@
+✔ allowlist build and exactly-once inline standalone include actual runtime (11.952985ms)
+✖ build refuses source symlink without touching sentinel (7.766562ms)
+✖ build refuses output symlink without touching sentinel (6.362675ms)
+✖ build refuses dangling symlink without touching sentinel (6.632276ms)
+✖ build refuses ancestor symlink without touching sentinel (6.650436ms)
+✖ exportHTML refuses source symlink without touching sentinel (4.168863ms)
+✖ exportHTML refuses output symlink without touching sentinel (5.269908ms)
+✖ exportHTML refuses dangling symlink without touching sentinel (4.172343ms)
+✖ exportHTML refuses ancestor symlink without touching sentinel (4.379144ms)
+✖ export refuses duplicate/missing/foreign script and stylesheet references; build rejects stray files (5.176188ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 1
+ℹ fail 9
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 143.271257
+
+✖ failing tests:
+
+test at tests/boundary.test.cjs:10:103
+✖ build refuses source symlink without touching sentinel (7.766562ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/root/projects/moonlit-courier/.worktrees/v1/tests/boundary.test.cjs:17:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /symlink/i,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/boundary.test.cjs:10:103
+✖ build refuses output symlink without touching sentinel (6.362675ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/root/projects/moonlit-courier/.worktrees/v1/tests/boundary.test.cjs:17:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /symlink/i,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/boundary.test.cjs:10:103
+✖ build refuses dangling symlink without touching sentinel (6.632276ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/root/projects/moonlit-courier/.worktrees/v1/tests/boundary.test.cjs:17:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /symlink/i,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/boundary.test.cjs:10:103
+✖ build refuses ancestor symlink without touching sentinel (6.650436ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/root/projects/moonlit-courier/.worktrees/v1/tests/boundary.test.cjs:17:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /symlink/i,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/boundary.test.cjs:10:103
+✖ exportHTML refuses source symlink without touching sentinel (4.168863ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/root/projects/moonlit-courier/.worktrees/v1/tests/boundary.test.cjs:17:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /symlink/i,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/boundary.test.cjs:10:103
+✖ exportHTML refuses output symlink without touching sentinel (5.269908ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/root/projects/moonlit-courier/.worktrees/v1/tests/boundary.test.cjs:17:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /symlink/i,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/boundary.test.cjs:10:103
+✖ exportHTML refuses dangling symlink without touching sentinel (4.172343ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/root/projects/moonlit-courier/.worktrees/v1/tests/boundary.test.cjs:17:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /symlink/i,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/boundary.test.cjs:10:103
+✖ exportHTML refuses ancestor symlink without touching sentinel (4.379144ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/root/projects/moonlit-courier/.worktrees/v1/tests/boundary.test.cjs:17:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /symlink/i,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/boundary.test.cjs:20:1
+✖ export refuses duplicate/missing/foreign script and stylesheet references; build rejects stray files (5.176188ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/root/projects/moonlit-courier/.worktrees/v1/tests/boundary.test.cjs:22:128)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /references/i,
+    operator: 'throws',
+    diff: 'simple'
+  }

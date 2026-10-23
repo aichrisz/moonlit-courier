@@ -1,0 +1,18 @@
+✔ allowlist build and exactly-once inline standalone include actual runtime (14.6906ms)
+✔ build refuses source symlink without touching sentinel (3.860381ms)
+✔ build refuses output symlink without touching sentinel (2.875296ms)
+✔ build refuses dangling symlink without touching sentinel (2.541694ms)
+✔ build refuses ancestor symlink without touching sentinel (2.502174ms)
+✔ exportHTML refuses source symlink without touching sentinel (2.708455ms)
+✔ exportHTML refuses output symlink without touching sentinel (2.946416ms)
+✔ exportHTML refuses dangling symlink without touching sentinel (2.465533ms)
+✔ exportHTML refuses ancestor symlink without touching sentinel (2.706774ms)
+✔ export refuses duplicate/missing/foreign script and stylesheet references; build rejects stray files (11.442982ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 132.719002
