@@ -1,0 +1,51 @@
+
+> moonlit-courier@1.0.0 test:browser
+> playwright test --grep sound
+
+
+Running 1 test using 1 worker
+
+  ✘  1 tests/e2e/game.spec.cjs:44:1 › sound remains opt-in, native checkbox Space enables it and pause silences (4.9s)
+
+
+  1) tests/e2e/game.spec.cjs:44:1 › sound remains opt-in, native checkbox Space enables it and pause silences 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('#sound-status')
+    Expected: "Sound on"
+    Received: "Sound off"
+    Timeout:  3000ms
+
+    Call log:
+      - Expect "toHaveText" locator('#sound-status') with timeout 3000ms
+      - waiting for locator('#sound-status')
+        10 × locator resolved to <span role="status" id="sound-status">Sound off</span>
+           - unexpected value "Sound off"
+
+
+      44 | test('sound remains opt-in, native checkbox Space enables it and pause silences',async({page})=>{
+      45 |  await setup(page);await start(page);await expect(page.locator('#sound-status')).toHaveText('Sound off');
+    > 46 |  await page.locator('#sound').focus();await page.keyboard.down('Space');await expect(page.locator('#sound')).not.toBeChecked();await page.keyboard.up('Space');await expect(page.locator('#sound')).toBeChecked();await expect(page.locator('#sound-status')).toHaveText('Sound on');
+         |                                                                                                                                                                                                                                                               ^
+      47 |  await page.locator('#world').focus();await page.keyboard.press('Space');await page.clock.runFor(80);await page.keyboard.press('Escape');await expect(page.locator('#sound-status')).toHaveText('Sound paused');
+      48 |  await page.locator('#sound').uncheck();await expect(page.locator('#sound-status')).toHaveText('Sound off');
+      49 | });
+        at /root/projects/moonlit-courier/.worktrees/v1/tests/e2e/game.spec.cjs:46:255
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/game-sound-remains-opt-in--7d602-ables-it-and-pause-silences/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/game-sound-remains-opt-in--7d602-ables-it-and-pause-silences/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/game-sound-remains-opt-in--7d602-ables-it-and-pause-silences/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/game-sound-remains-opt-in--7d602-ables-it-and-pause-silences/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/game.spec.cjs:44:1 › sound remains opt-in, native checkbox Space enables it and pause silences 

@@ -1,0 +1,51 @@
+
+> moonlit-courier@1.0.0 test:browser
+> playwright test
+
+
+Running 1 test using 1 worker
+
+  ✘  1 tests/e2e/game.spec.cjs:7:1 › native start, movement, jump, horizontal dash and pause (3.8s)
+
+
+  1) tests/e2e/game.spec.cjs:7:1 › native start, movement, jump, horizontal dash and pause ─────────
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#world')
+    Expected: "playing"
+    Received: "ready"
+    Timeout:  3000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#world') with timeout 3000ms
+      - waiting for locator('#world')
+        10 × locator resolved to <canvas id="world" width="960" height="540" tabindex="0" data-phase="ready" aria-describedby="instructions" aria-label="Courier world. Use left and right, Space to jump, X to dash.">A visual platform adventure. Controls and progres…</canvas>
+           - unexpected value "ready"
+
+
+       6 | const pos=async page=>page.locator('#world').evaluate(c=>({x:+c.dataset.playerX,y:+c.dataset.playerY,phase:c.dataset.phase}));
+       7 | test('native start, movement, jump, horizontal dash and pause',async({page})=>{
+    >  8 |  await setup(page);await start(page);await expect(page.locator('#world')).toHaveAttribute('data-phase','playing');
+         |                                                                           ^
+       9 |  const a=await pos(page);await page.keyboard.down('ArrowRight');await page.clock.runFor(200);await page.keyboard.up('ArrowRight');expect((await pos(page)).x).toBeGreaterThan(a.x+30);
+      10 |  await page.keyboard.down('Space');await page.clock.runFor(120);await page.keyboard.up('Space');expect((await pos(page)).y).toBeLessThan(a.y-25);
+      11 |  await page.keyboard.press('x');await page.clock.runFor(50);await expect(page.locator('#dash-status')).toHaveText('Dash spent');
+        at /root/projects/moonlit-courier/.worktrees/v1/tests/e2e/game.spec.cjs:8:75
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/game-native-start-movement-jump-horizontal-dash-and-pause/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/game-native-start-movement-jump-horizontal-dash-and-pause/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/game-native-start-movement-jump-horizontal-dash-and-pause/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/game-native-start-movement-jump-horizontal-dash-and-pause/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/game.spec.cjs:7:1 › native start, movement, jump, horizontal dash and pause ──────────

@@ -1,0 +1,91 @@
+
+> moonlit-courier@1.0.0 test:browser
+> playwright test
+
+
+Running 13 tests using 1 worker
+
+  ✘   1 tests/e2e/campaign.spec.cjs:4:1 › source native complete campaign: all nine letters, all exits, persistent records and replay (4.9s)
+  ✓   2 tests/e2e/campaign.spec.cjs:15:1 › actual results show denied writes, session unlock still works (39.7s)
+  ✓   3 tests/e2e/campaign.spec.cjs:19:84 › layout and real screenshots 320x568 DPR2 (29.7s)
+  ✓   4 tests/e2e/campaign.spec.cjs:19:84 › layout and real screenshots 390x844 DPR2 (30.1s)
+  ✓   5 tests/e2e/campaign.spec.cjs:19:84 › layout and real screenshots 768x1024 DPR2 (32.5s)
+  ✓   6 tests/e2e/campaign.spec.cjs:19:84 › layout and real screenshots 1366x768 DPR2 (33.8s)
+  ✓   7 tests/e2e/campaign.spec.cjs:19:84 › layout and real screenshots 1440x900 DPR2 (38.4s)
+  ✓   8 tests/e2e/campaign.spec.cjs:32:1 › one positive fixed-step rAF chain across repeated pause/restart; detached DOM output (4.1s)
+  ✘   9 tests/e2e/campaign.spec.cjs:46:1 › axe DOM accessibility in ready, playing, paused and real results (3.7s)
+  ✓  10 tests/e2e/game.spec.cjs:3:1 › native start, movement, jump, horizontal dash and pause (4.4s)
+  ✓  11 tests/e2e/game.spec.cjs:11:1 › lifecycle pauses release held input and settings retain native Space (4.4s)
+  ✓  12 tests/e2e/game.spec.cjs:28:1 › native multitouch movement plus jump, cancel and lost capture release (2.8s)
+  ✓  13 tests/e2e/game.spec.cjs:39:1 › sound remains opt-in, native checkbox Space enables it and pause silences (2.0s)
+
+
+  1) tests/e2e/campaign.spec.cjs:4:1 › source native complete campaign: all nine letters, all exits, persistent records and replay 
+
+    Error: expect(locator).toBeFocused() failed
+
+    Locator:  locator('#start')
+    Expected: focused
+    Received: inactive
+    Timeout:  3000ms
+
+    Call log:
+      - Expect "toBeFocused" locator('#start') with timeout 3000ms
+      - waiting for locator('#start')
+        10 × locator resolved to <button id="start" class="primary">Begin delivery →</button>
+           - unexpected value "inactive"
+
+
+       5 |  const errors=[];page.on('pageerror',e=>errors.push(e.message));await setup(page);const trace=[];
+       6 |  for(let l=0;l<3;l++){
+    >  7 |   if(l)await page.locator('#next').click();await expect(page.locator('#start')).toBeFocused();await start(page);
+         |                                                                                 ^
+       8 |   trace.push(await route(page,l));await page.screenshot({path:`artifacts/evidence/source-level-${l+1}-results.png`});
+       9 |   await expect(page.locator('#save-status')).toContainText('Saved on this device');
+      10 |  }
+        at /root/projects/moonlit-courier/.worktrees/v1/tests/e2e/campaign.spec.cjs:7:81
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/campaign-source-native-com-659a3-rsistent-records-and-replay/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/campaign-source-native-com-659a3-rsistent-records-and-replay/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/campaign-source-native-com-659a3-rsistent-records-and-replay/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/campaign-source-native-com-659a3-rsistent-records-and-replay/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/campaign.spec.cjs:46:1 › axe DOM accessibility in ready, playing, paused and real results 
+
+    Error: clock.pauseAt: Error: Cannot fast-forward to the past
+        at ClockController._innerFastForwardTo (<anonymous>:202:13)
+        at ClockController.pauseAt (<anonymous>:133:16)
+        at async <anonymous>:396:30
+        at ClockController._innerFastForwardTo (<anonymous>:202:13)
+        at ClockController.pauseAt (<anonymous>:133:16)
+        at async <anonymous>:396:30
+        at audit (/root/projects/moonlit-courier/.worktrees/v1/tests/e2e/campaign.spec.cjs:51:66)
+        at /root/projects/moonlit-courier/.worktrees/v1/tests/e2e/campaign.spec.cjs:53:41
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/campaign-axe-DOM-accessibi-b0ed6-ing-paused-and-real-results/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/campaign-axe-DOM-accessibi-b0ed6-ing-paused-and-real-results/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/campaign-axe-DOM-accessibi-b0ed6-ing-paused-and-real-results/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/campaign-axe-DOM-accessibi-b0ed6-ing-paused-and-real-results/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/e2e/campaign.spec.cjs:4:1 › source native complete campaign: all nine letters, all exits, persistent records and replay 
+    tests/e2e/campaign.spec.cjs:46:1 › axe DOM accessibility in ready, playing, paused and real results 
+  11 passed (3.9m)

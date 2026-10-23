@@ -1,0 +1,38 @@
+
+> moonlit-courier@1.0.0 test:browser
+> playwright test
+
+
+Running 1 test using 1 worker
+
+  ✘  1 tests/e2e/game.spec.cjs:7:1 › native start, movement, jump, horizontal dash and pause (2.0s)
+
+
+  1) tests/e2e/game.spec.cjs:7:1 › native start, movement, jump, horizontal dash and pause ─────────
+
+    Error: clock.pauseAt: Error: Cannot fast-forward to the past
+        at ClockController._innerFastForwardTo (<anonymous>:202:13)
+        at ClockController.pauseAt (<anonymous>:133:16)
+        at async <anonymous>:396:30
+        at ClockController._innerFastForwardTo (<anonymous>:202:13)
+        at ClockController.pauseAt (<anonymous>:133:16)
+        at async <anonymous>:396:30
+        at setup (/root/projects/moonlit-courier/.worktrees/v1/tests/e2e/game.spec.cjs:3:67)
+        at /root/projects/moonlit-courier/.worktrees/v1/tests/e2e/game.spec.cjs:8:2
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/game-native-start-movement-jump-horizontal-dash-and-pause/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/game-native-start-movement-jump-horizontal-dash-and-pause/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/game-native-start-movement-jump-horizontal-dash-and-pause/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/game-native-start-movement-jump-horizontal-dash-and-pause/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/game.spec.cjs:7:1 › native start, movement, jump, horizontal dash and pause ──────────

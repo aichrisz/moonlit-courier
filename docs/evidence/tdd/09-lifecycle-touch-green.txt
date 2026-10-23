@@ -1,0 +1,12 @@
+
+> moonlit-courier@1.0.0 test:browser
+> playwright test
+
+
+Running 3 tests using 1 worker
+
+  ✓  1 tests/e2e/game.spec.cjs:8:1 › native start, movement, jump, horizontal dash and pause (5.8s)
+  ✓  2 tests/e2e/game.spec.cjs:16:1 › lifecycle pauses release held input and settings retain native Space (6.3s)
+  ✓  3 tests/e2e/game.spec.cjs:33:1 › native multitouch movement plus jump, cancel and lost capture release (4.1s)
+
+  3 passed (18.0s)

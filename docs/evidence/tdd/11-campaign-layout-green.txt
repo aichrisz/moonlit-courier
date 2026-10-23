@@ -1,0 +1,11 @@
+
+> moonlit-courier@1.0.0 test:browser
+> playwright test --grep source native|axe DOM
+
+
+Running 2 tests using 1 worker
+
+  ✓  1 tests/e2e/campaign.spec.cjs:4:1 › source native complete campaign: all nine letters, all exits, persistent records and replay (1.3m)
+  ✓  2 tests/e2e/campaign.spec.cjs:46:1 › axe DOM accessibility in ready, playing, paused and real results (28.1s)
+
+  2 passed (1.8m)
