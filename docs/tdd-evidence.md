@@ -19,4 +19,16 @@ The baseline 9a1c04c contained only approved design/plan documentation. No passi
 
 11 first-run also passed all five DPR2 layout cases in ready/playing/paused/results, storage-denied real results, loop instrumentation and native input cases. These are regression/acceptance tests added after the underlying features, not misrepresented as test-first feature implementation. Clock harness failures are retained separately and are not production RED evidence. Renderer background caching was a post-GREEN refactor; it preserves the foreground simulation and drawing-only contract.
 
-Checkpoint: Tasks 1–3 committed; Task4 native source campaign, original renderer, touch/lifecycle/audio and layout implemented and exercised. Build/export/archive boundary helpers and their tests, final packaged/offline native campaign and handoff verification remain at this checkpoint. No publication was performed.
+| Slice | Command | Observed RED | Observed GREEN |
+|---|---|---|---|
+|12 delivery API|`node --test tests/boundary.test.cjs`|public helper module absent|allowlisted build and inline standalone passed|
+|13 delivery boundaries|`node --test tests/boundary.test.cjs`|symlink and unexpected-reference assertions failed|10 tests passed after preflight/refusal implementation|
+|14 archive API|`node --test tests/archive.test.cjs`|Python packager absent|synthetic three-file committed archive verified|
+|15 archive security|`node --test tests/archive.test.cjs`|five actual symlink-refusal assertions failed (exit status was incorrectly zero); expanded manifest/root/metadata cases also failed|10 tests passed after complete preflight; release gate stub removed|
+|16 check|`node --test tests/check.test.cjs`|check API absent|2 checks passed, including syntax/private-path/network/test-skip refusal|
+
+Post-GREEN readability refactor: `npm run test:unit` passed 47 tests (17-readability-green.txt), with mechanics/constants unchanged. The subsequent deterministic ZIP regression test is part of final verification.
+
+Native build/offline/shortcut regression: `npm run test:browser -- --grep 'Escape and P|native nine-letter'` passed all 3 (18-delivery-green.txt). Both targets collected all nine letters and all exits. Offline was actually offline with only the main file request and computed root CSS checked. Existing Escape/P resume already passed with Resume focused, so no fake RED or unnecessary app patch was introduced.
+
+Final gate status and exact evidence are maintained in docs/implementation-evidence.md. All artifacts remain local pending independent parent acceptance/review/release; no publication was performed.

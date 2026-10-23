@@ -1,0 +1,59 @@
+
+> moonlit-courier@1.0.0 test:unit
+> node --test tests/*.test.cjs
+
+✔ source archive contains exactly manifest and committed bytes (110.416296ms)
+✔ archive refuses source symlink without touching sentinel (104.12514ms)
+✔ archive refuses source-ancestor symlink without touching sentinel (100.646361ms)
+✔ archive refuses output symlink without touching sentinel (106.246032ms)
+✔ archive refuses dangling symlink without touching sentinel (108.069522ms)
+✔ archive refuses ancestor symlink without touching sentinel (106.478153ms)
+✔ archive refuses dirty source and manifest traversal (182.494217ms)
+✔ archive refuses manifest symlink before reading or writing (96.90582ms)
+✔ archive refuses metadata symlink before reading or writing (106.458193ms)
+✔ archive refuses root symlink before reading or writing (96.168056ms)
+✔ off by default, opt-in signal, pause/mute stop nodes and master gain (1.552208ms)
+✔ unavailable or rejected audio remains a handled unavailable status (0.656404ms)
+✔ allowlist build and exactly-once inline standalone include actual runtime (17.300496ms)
+✔ build refuses source symlink without touching sentinel (3.876102ms)
+✔ build refuses output symlink without touching sentinel (5.071308ms)
+✔ build refuses dangling symlink without touching sentinel (4.877067ms)
+✔ build refuses ancestor symlink without touching sentinel (4.717387ms)
+✔ exportHTML refuses source symlink without touching sentinel (5.226229ms)
+✔ exportHTML refuses output symlink without touching sentinel (5.177668ms)
+✔ exportHTML refuses dangling symlink without touching sentinel (4.982068ms)
+✔ exportHTML refuses ancestor symlink without touching sentinel (5.213789ms)
+✔ export refuses duplicate/missing/foreign script and stylesheet references; build rejects stray files (23.102328ms)
+✔ check validates explicit source, pinned dev-only dependencies and syntax (205.158023ms)
+✔ check refuses broken JS, private paths, skips and runtime network code (673.722875ms)
+✔ jump leaves spawn and lands safely; snapshots detached (9.508813ms)
+✔ fixed input simulation deterministic and invalid time rejected (8.332047ms)
+✔ ordinary witness level 1, timing margin -1 (38.136252ms)
+✔ ordinary witness level 1, timing margin 0 (15.958769ms)
+✔ ordinary witness level 1, timing margin 1 (9.833015ms)
+✔ ordinary witness level 2, timing margin -1 (19.512508ms)
+✔ ordinary witness level 2, timing margin 0 (8.406327ms)
+✔ ordinary witness level 2, timing margin 1 (13.505915ms)
+✔ ordinary witness level 3, timing margin -1 (30.098568ms)
+✔ ordinary witness level 3, timing margin 0 (12.202788ms)
+✔ ordinary witness level 3, timing margin 1 (10.069016ms)
+✔ every checkpoint is safe for idle respawn and long mixed input stays finite (161.694861ms)
+✔ three distinct authored worlds with 2 required + 1 scenic each (0.421643ms)
+✔ required delivery is not locked by absent scenic letter (4.529945ms)
+✔ 100ms coyote jump after walking off edge (4.072063ms)
+✔ 120ms buffered jump is consumed on landing, not held autojump (4.495385ms)
+✔ single horizontal air dash suspends gravity and refills only on landing (2.054091ms)
+✔ thin hazards and walls cannot be tunneled at maximum accepted dt (1.609729ms)
+✔ moving platform carries grounded passenger and underside stops ascent (1.924451ms)
+✔ physical checkpoint and letters survive death; exit completion idempotent (9.685974ms)
+✔ bounded versioned records reject corrupt, hostile, foreign and out-of-range values (1.338808ms)
+✔ completion keeps best, bonus and unlock bounded; duplicate cannot increment (1.579489ms)
+✔ read and write denial are separate truthful outcomes (0.707724ms)
+ℹ tests 47
+ℹ suites 0
+ℹ pass 47
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2987.095169

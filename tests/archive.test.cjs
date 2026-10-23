@@ -16,4 +16,21 @@ for(const kind of ['source','source-ancestor','output','dangling','ancestor'])te
 test('archive refuses dirty source and manifest traversal',()=>{
  const root=fixture();try{fs.writeFileSync(path.join(root,'index.html'),'changed');let result=pack(root);assert.notEqual(result.status,0);assert.match(result.stderr,/Dirty source/);fs.writeFileSync(path.join(root,'source-files.json'),JSON.stringify(['../outside']));result=pack(root);assert.notEqual(result.status,0);}finally{fs.rmSync(root,{recursive:true,force:true});}
 });
+for(const kind of ['manifest','metadata','root'])test(`archive refuses ${kind} symlink before reading or writing`,()=>{
+ const root=fixture(),outside=fs.mkdtempSync(path.join(base,'outside-')),sentinel=path.join(outside,'sentinel');fs.writeFileSync(sentinel,'SYNTHETIC UNCHANGED');
+ try{
+  let input=root;
+  if(kind==='manifest'){fs.renameSync(path.join(root,'source-files.json'),path.join(outside,'manifest'));fs.symlinkSync(path.join(outside,'manifest'),path.join(root,'source-files.json'));}
+  if(kind==='metadata'){fs.mkdirSync(path.join(root,'artifacts/evidence'),{recursive:true});fs.symlinkSync(sentinel,path.join(root,'artifacts/evidence/package.json'));}
+  if(kind==='root'){input=path.join(outside,'linked-root');fs.symlinkSync(root,input);}
+  const result=pack(input);assert.notEqual(result.status,0);assert.match(result.stderr,/symlink/i);assert.equal(fs.readFileSync(sentinel,'utf8'),'SYNTHETIC UNCHANGED');
+ }finally{fs.rmSync(root,{recursive:true,force:true});fs.rmSync(outside,{recursive:true,force:true});}
+});
+test('archive bytes are deterministic and report is read-back verified',()=>{
+ const root=fixture();try {
+  const first=pack(root);assert.equal(first.status,0,first.stderr);const zip=path.join(root,'artifacts/Moonlit-Courier-source.zip'),before=fs.readFileSync(zip);
+  const second=pack(root);assert.equal(second.status,0,second.stderr);assert.deepEqual(fs.readFileSync(zip),before);
+  const report=JSON.parse(fs.readFileSync(path.join(root,'artifacts/evidence/package.json')));assert.equal(report.files,3);assert.equal(report.zip_sha256,require('node:crypto').createHash('sha256').update(before).digest('hex'));assert.equal(Object.keys(report.sources).length,3);
+ }finally{fs.rmSync(root,{recursive:true,force:true});}
+});
 module.exports={fixture,pack,base};

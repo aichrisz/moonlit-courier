@@ -1,0 +1,18 @@
+✔ source archive contains exactly manifest and committed bytes (111.907865ms)
+✔ archive refuses source symlink without touching sentinel (102.911734ms)
+✔ archive refuses source-ancestor symlink without touching sentinel (101.277605ms)
+✔ archive refuses output symlink without touching sentinel (106.624635ms)
+✔ archive refuses dangling symlink without touching sentinel (104.540544ms)
+✔ archive refuses ancestor symlink without touching sentinel (104.074301ms)
+✔ archive refuses dirty source and manifest traversal (180.697649ms)
+✔ archive refuses manifest symlink before reading or writing (96.032696ms)
+✔ archive refuses metadata symlink before reading or writing (107.56888ms)
+✔ archive refuses root symlink before reading or writing (95.527493ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1195.330268

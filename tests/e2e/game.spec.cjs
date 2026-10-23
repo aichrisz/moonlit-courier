@@ -42,4 +42,11 @@ test('sound remains opt-in, native checkbox Space enables it and pause silences'
  await page.locator('#world').focus();await page.keyboard.press('Space');await page.clock.runFor(80);await page.keyboard.press('Escape');await expect(page.locator('#sound-status')).toHaveText('Sound paused');
  await page.locator('#sound').uncheck();await expect(page.locator('#sound-status')).toHaveText('Sound off');
 });
+test('Escape and P each resume natively while the Resume button owns focus',async({page})=>{
+ await setup(page);await start(page);
+ for(const key of ['Escape','p'])for(let repeat=0;repeat<2;repeat++){
+  await page.keyboard.press(key);await expect(page.locator('#world')).toHaveAttribute('data-phase','paused');await expect(page.locator('#resume')).toBeFocused();
+  await page.keyboard.press(key);await expect(page.locator('#world')).toHaveAttribute('data-phase','playing');await expect(page.locator('#world')).toBeFocused();await page.clock.runFor(40);
+ }
+});
 module.exports={setup,start,pos};

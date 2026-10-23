@@ -1,0 +1,164 @@
+✔ source archive contains exactly manifest and committed bytes (103.134449ms)
+✖ archive refuses source symlink without touching sentinel (99.65471ms)
+✖ archive refuses source-ancestor symlink without touching sentinel (97.459817ms)
+✖ archive refuses output symlink without touching sentinel (94.511161ms)
+✖ archive refuses dangling symlink without touching sentinel (94.900403ms)
+✖ archive refuses ancestor symlink without touching sentinel (93.468515ms)
+✔ archive refuses dirty source and manifest traversal (167.239002ms)
+✖ archive refuses manifest symlink before reading or writing (95.228165ms)
+✖ archive refuses metadata symlink before reading or writing (97.023854ms)
+✖ archive refuses root symlink before reading or writing (97.277776ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 2
+ℹ fail 8
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1128.473501
+
+✖ failing tests:
+
+test at tests/archive.test.cjs:6:79
+✖ archive refuses source symlink without touching sentinel (99.65471ms)
+  AssertionError [ERR_ASSERTION]: symlink must be refused
+      at TestContext.<anonymous> (/root/projects/moonlit-courier/.worktrees/v1/tests/archive.test.cjs:13:34)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 0,
+    operator: 'notStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/archive.test.cjs:6:79
+✖ archive refuses source-ancestor symlink without touching sentinel (97.459817ms)
+  AssertionError [ERR_ASSERTION]: symlink must be refused
+      at TestContext.<anonymous> (/root/projects/moonlit-courier/.worktrees/v1/tests/archive.test.cjs:13:34)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 0,
+    operator: 'notStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/archive.test.cjs:6:79
+✖ archive refuses output symlink without touching sentinel (94.511161ms)
+  AssertionError [ERR_ASSERTION]: symlink must be refused
+      at TestContext.<anonymous> (/root/projects/moonlit-courier/.worktrees/v1/tests/archive.test.cjs:13:34)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 0,
+    operator: 'notStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/archive.test.cjs:6:79
+✖ archive refuses dangling symlink without touching sentinel (94.900403ms)
+  AssertionError [ERR_ASSERTION]: symlink must be refused
+      at TestContext.<anonymous> (/root/projects/moonlit-courier/.worktrees/v1/tests/archive.test.cjs:13:34)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 0,
+    operator: 'notStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/archive.test.cjs:6:79
+✖ archive refuses ancestor symlink without touching sentinel (93.468515ms)
+  AssertionError [ERR_ASSERTION]: symlink must be refused
+      at TestContext.<anonymous> (/root/projects/moonlit-courier/.worktrees/v1/tests/archive.test.cjs:13:34)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 0,
+    operator: 'notStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/archive.test.cjs:19:50
+✖ archive refuses manifest symlink before reading or writing (95.228165ms)
+  AssertionError [ERR_ASSERTION]: Expected "actual" to be strictly unequal to: 0
+      at TestContext.<anonymous> (/root/projects/moonlit-courier/.worktrees/v1/tests/archive.test.cjs:26:35)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 0,
+    operator: 'notStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/archive.test.cjs:19:50
+✖ archive refuses metadata symlink before reading or writing (97.023854ms)
+  AssertionError [ERR_ASSERTION]: Expected "actual" to be strictly unequal to: 0
+      at TestContext.<anonymous> (/root/projects/moonlit-courier/.worktrees/v1/tests/archive.test.cjs:26:35)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 0,
+    operator: 'notStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/archive.test.cjs:19:50
+✖ archive refuses root symlink before reading or writing (97.277776ms)
+  AssertionError [ERR_ASSERTION]: Expected "actual" to be strictly unequal to: 0
+      at TestContext.<anonymous> (/root/projects/moonlit-courier/.worktrees/v1/tests/archive.test.cjs:26:35)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 0,
+    operator: 'notStrictEqual',
+    diff: 'simple'
+  }
