@@ -6,6 +6,8 @@
   "app.js",
   "audio.js",
   "docs/architecture.md",
+  "docs/deployment.md",
+  "docs/evidence/publication-verification.json",
   "docs/evidence/tdd/01-movement-green.txt",
   "docs/evidence/tdd/01-movement-red.txt",
   "docs/evidence/tdd/02-grace-green.txt",

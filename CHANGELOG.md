@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.0 — local candidate, pending parent release
+## 1.0.0 — 2026-10-23 (published)
 
 - Three authored side-scrolling routes: Lantern Rooftops, The Thirteenth Bell and Moonwake Gardens.
 - Nine collectible letters, two required deliveries plus an optional scenic stamp per route, safe checkpoints, mailbox exits and campaign replay.
@@ -11,4 +11,4 @@
 - Allowlisted static build, exactly-once standalone HTML export and deterministic committed-source ZIP with symlink/path refusal.
 - Genuine slice RED/GREEN logs, reusable legal-input witnesses, unit tests, Chromium source/build/offline campaigns, five-size DPR2 layout evidence and DOM axe checks.
 
-No public deployment, independent review verdict or cross-browser certification is implied by this changelog.
+Published on GitHub Pages after independent48-unit/16-browser/audit0 gates and fresh exact-Astra ship review. Eight live runtime body matches, actual public full nine-letter/three-exit campaign, desktop/touch lifecycle and native audio/fallbacks passed. See docs/deployment.md; no physical-device/cross-browser/manual accessibility or human listening certification is claimed.

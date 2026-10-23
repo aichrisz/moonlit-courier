@@ -1,0 +1,735 @@
+{
+  "date": "2026-10-23",
+  "approved_target": "aichrisz/moonlit-courier",
+  "release_commit": "de7e75fb88912b0cbca7ac4e5d66e72c92a7bf3c",
+  "release_tag": "v1.0.0",
+  "pages_commit": "d907f1ddd71f718d05bc0bb0f2fdc5acd39eb5a1",
+  "live_files": [
+    {
+      "file": "index.html",
+      "bytes": 3959,
+      "sha256": "c658b875789b5a56bff2c0bcf0678858a52b5650761f826f45b3b0feee2c0d55",
+      "matches_build": true
+    },
+    {
+      "file": "styles.css",
+      "bytes": 5214,
+      "sha256": "e400a92478bc6d61258a640b015fd57da74ceb219d5fb7c72b29dcdf436fee0c",
+      "matches_build": true
+    },
+    {
+      "file": "levels.js",
+      "bytes": 2751,
+      "sha256": "69ccfef16b6a5e74330acf4f225c2f9fa9d0de5a1cd8599a0b222a559be87e10",
+      "matches_build": true
+    },
+    {
+      "file": "engine.js",
+      "bytes": 6905,
+      "sha256": "acd892131413ea93f92fcfa6d61623aad33b5490c5d834d06b32f564d69b1eff",
+      "matches_build": true
+    },
+    {
+      "file": "records.js",
+      "bytes": 3060,
+      "sha256": "203c94dbfc4db94d3975e0c0a3b71b813efd086584b83f87d18fea0fb4b6e2dc",
+      "matches_build": true
+    },
+    {
+      "file": "renderer.js",
+      "bytes": 9468,
+      "sha256": "6fc94ff5508d5dd0d100533ed7ef4474aeb7bfa1e506a385789e617bc33e8c7a",
+      "matches_build": true
+    },
+    {
+      "file": "audio.js",
+      "bytes": 2604,
+      "sha256": "2f58bdba5c5e58621cbbeb3d15b1c859d8650a9d910ae26c4c5ccdb6c0569563",
+      "matches_build": true
+    },
+    {
+      "file": "app.js",
+      "bytes": 9824,
+      "sha256": "9303d29d0529ae4813b592724fa87f5f64af740a904e768569051abf00e3e337",
+      "matches_build": true
+    }
+  ],
+  "https_enforced": true,
+  "review": {
+    "source_sha": "de7e75fb88912b0cbca7ac4e5d66e72c92a7bf3c",
+    "review_session": "20261023_191825_69881d",
+    "actual_model": "gpt-6-astra",
+    "actual_provider": "openai-codex",
+    "tracked_files": 91,
+    "all_tracked_bytes_unchanged": true,
+    "head_status_index_diff_unchanged": true,
+    "source_fingerprint_sha256": "19f4da1e87839a9511d304d01530e6834b96ace0e07c66bacd375e6c27cab474",
+    "runtime_hashes": {
+      "index.html": "c658b875789b5a56bff2c0bcf0678858a52b5650761f826f45b3b0feee2c0d55",
+      "styles.css": "e400a92478bc6d61258a640b015fd57da74ceb219d5fb7c72b29dcdf436fee0c",
+      "levels.js": "69ccfef16b6a5e74330acf4f225c2f9fa9d0de5a1cd8599a0b222a559be87e10",
+      "engine.js": "acd892131413ea93f92fcfa6d61623aad33b5490c5d834d06b32f564d69b1eff",
+      "records.js": "203c94dbfc4db94d3975e0c0a3b71b813efd086584b83f87d18fea0fb4b6e2dc",
+      "renderer.js": "6fc94ff5508d5dd0d100533ed7ef4474aeb7bfa1e506a385789e617bc33e8c7a",
+      "audio.js": "2f58bdba5c5e58621cbbeb3d15b1c859d8650a9d910ae26c4c5ccdb6c0569563",
+      "app.js": "9303d29d0529ae4813b592724fa87f5f64af740a904e768569051abf00e3e337"
+    },
+    "verdict": {
+      "verdict": "ship",
+      "blocking": [],
+      "nonblocking": [
+        {
+          "file": "tests/acceptance/native.cjs",
+          "line": 183,
+          "issue": "The native dash assertion checks only that the HUD text is nonempty; it would also accept 'Dash ready' if dash input stopped working.",
+          "evidence/reproduction": "Lines 176\u2013183 dispatch dash input but assert only dash.trim().length > 0. Strengthen this to require 'Dash spent' and observable horizontal displacement. This is a regression-test weakness, not an observed gameplay failure: the existing source, dist and offline touch reports each record 'Dash spent'."
+        }
+      ],
+      "reason": "No release-blocking player, correctness or security issue found in the approved scope. Reviewed the normative documents, all eight runtime files, delivery helpers, boundary/archive tests, independent acceptance code, final-gate evidence and every referenced raw log. HEAD is de7e75fb88912b0cbca7ac4e5d66e72c92a7bf3c; runtime and recorded behavior hashes match the gate, and final status/staged/unstaged checks are clean. Independently ran 25 nonmutating unit tests, all passing, plus source checks, source/dist byte comparisons and ZIP integrity testing. Artifact hashes match the parent attestation. The parent's full 48-unit/16-browser gate, zero-vulnerability audit, independent nine-letter/three-exit campaigns, lifecycle variants and measured audio checks were reviewed, not rerun. No files were edited or artifacts regenerated. Public publication and actual model/session/fingerprint attestations remain separate parent gates; this verdict does not certify physical phones, other browsers or human accessibility/audio experience."
+    }
+  },
+  "local_gate": {
+    "unit": {
+      "tests": 48,
+      "pass": 48,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "browser": {
+      "startTime": "2026-10-23T09:43:57.888Z",
+      "duration": 455603.508,
+      "expected": 16,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "audit_vulnerabilities": 0,
+    "campaigns": {
+      "source": {
+        "letters": 9,
+        "levels": 3,
+        "loop": {
+          "ticks": 1548,
+          "max": 1
+        },
+        "errors": []
+      },
+      "dist": {
+        "letters": 9,
+        "levels": 3,
+        "loop": {
+          "ticks": 1549,
+          "max": 1
+        },
+        "errors": []
+      },
+      "offline": {
+        "letters": 9,
+        "levels": 3,
+        "loop": {
+          "ticks": 1549,
+          "max": 1
+        },
+        "errors": []
+      }
+    },
+    "native_variants": 6
+  },
+  "resumed_online_audit": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "artifact": {
+    "source_sha": "de7e75fb88912b0cbca7ac4e5d66e72c92a7bf3c",
+    "tracked_files": 91,
+    "history_objects": 188,
+    "history_blobs": 108,
+    "history_commits": 14,
+    "prohibited_paths": [],
+    "credential_pattern_hits": [],
+    "runtime_hashes": {
+      "index.html": "c658b875789b5a56bff2c0bcf0678858a52b5650761f826f45b3b0feee2c0d55",
+      "styles.css": "e400a92478bc6d61258a640b015fd57da74ceb219d5fb7c72b29dcdf436fee0c",
+      "levels.js": "69ccfef16b6a5e74330acf4f225c2f9fa9d0de5a1cd8599a0b222a559be87e10",
+      "engine.js": "acd892131413ea93f92fcfa6d61623aad33b5490c5d834d06b32f564d69b1eff",
+      "records.js": "203c94dbfc4db94d3975e0c0a3b71b813efd086584b83f87d18fea0fb4b6e2dc",
+      "renderer.js": "6fc94ff5508d5dd0d100533ed7ef4474aeb7bfa1e506a385789e617bc33e8c7a",
+      "audio.js": "2f58bdba5c5e58621cbbeb3d15b1c859d8650a9d910ae26c4c5ccdb6c0569563",
+      "app.js": "9303d29d0529ae4813b592724fa87f5f64af740a904e768569051abf00e3e337"
+    },
+    "standalone": {
+      "bytes": 43678,
+      "sha256": "b990876fdac3b8b4eab409ba7d35a651d7f803b12ac43cc6c5fe8bdd7b1ca457",
+      "embedded_scripts": 6
+    },
+    "source_archive": {
+      "entries": 91,
+      "bytes": 116079,
+      "sha256": "faf7b23d41d6c7f5e2bc15e51e8df0de29573606fabbcf344d7abfc84c4b1cd9",
+      "matches_committed_source": true
+    }
+  },
+  "public_campaign": {
+    "mode": "public",
+    "target": "https://aichrisz.github.io/moonlit-courier/",
+    "method": "independently derived geometry-driven route, no worker witnesses",
+    "levels": [
+      {
+        "index": 0,
+        "id": "rooftops",
+        "letters": 3,
+        "phase": "level-complete",
+        "observation": {
+          "phase": "level-complete",
+          "playerX": "2026.25",
+          "playerY": "400",
+          "grounded": "true",
+          "levelIndex": "0",
+          "collected": "[\"roof-home\",\"roof-wish\",\"roof-dawn\"]",
+          "ticks": "916"
+        },
+        "layout": {
+          "width": 1366,
+          "height": 768,
+          "overflow": false,
+          "boxes": [
+            {
+              "sel": "#world",
+              "x": 132,
+              "y": 191.890625,
+              "w": 1102,
+              "h": 456,
+              "right": 1234,
+              "bottom": 647.890625
+            },
+            {
+              "sel": "[data-input=left]",
+              "x": 131,
+              "y": 678.890625,
+              "w": 60,
+              "h": 48,
+              "right": 191,
+              "bottom": 726.890625
+            },
+            {
+              "sel": "[data-input=right]",
+              "x": 199,
+              "y": 678.890625,
+              "w": 60,
+              "h": 48,
+              "right": 259,
+              "bottom": 726.890625
+            },
+            {
+              "sel": "[data-input=jump]",
+              "x": 1046.609375,
+              "y": 678.890625,
+              "w": 90.40625,
+              "h": 48,
+              "right": 1137.015625,
+              "bottom": 726.890625
+            },
+            {
+              "sel": "[data-input=dash]",
+              "x": 1145.015625,
+              "y": 678.890625,
+              "w": 89.984375,
+              "h": 48,
+              "right": 1235,
+              "bottom": 726.890625
+            }
+          ]
+        },
+        "stored": {
+          "version": 1,
+          "unlocked": 1,
+          "levels": [
+            {
+              "complete": true,
+              "perfect": true,
+              "best": 7.631249999999727
+            },
+            {
+              "complete": false,
+              "perfect": false,
+              "best": null
+            },
+            {
+              "complete": false,
+              "perfect": false,
+              "best": null
+            }
+          ]
+        },
+        "save": "Saved on this device. Your best time and scenic stamp are safe."
+      },
+      {
+        "index": 1,
+        "id": "clocktower",
+        "letters": 3,
+        "phase": "level-complete",
+        "observation": {
+          "phase": "level-complete",
+          "playerX": "2126.25",
+          "playerY": "400",
+          "grounded": "true",
+          "levelIndex": "1",
+          "collected": "[\"bell-home\",\"bell-wish\",\"bell-dawn\"]",
+          "ticks": "973"
+        },
+        "layout": {
+          "width": 1366,
+          "height": 768,
+          "overflow": false,
+          "boxes": [
+            {
+              "sel": "#world",
+              "x": 132,
+              "y": 191.890625,
+              "w": 1102,
+              "h": 456,
+              "right": 1234,
+              "bottom": 647.890625
+            },
+            {
+              "sel": "[data-input=left]",
+              "x": 131,
+              "y": 678.890625,
+              "w": 60,
+              "h": 48,
+              "right": 191,
+              "bottom": 726.890625
+            },
+            {
+              "sel": "[data-input=right]",
+              "x": 199,
+              "y": 678.890625,
+              "w": 60,
+              "h": 48,
+              "right": 259,
+              "bottom": 726.890625
+            },
+            {
+              "sel": "[data-input=jump]",
+              "x": 1046.609375,
+              "y": 678.890625,
+              "w": 90.40625,
+              "h": 48,
+              "right": 1137.015625,
+              "bottom": 726.890625
+            },
+            {
+              "sel": "[data-input=dash]",
+              "x": 1145.015625,
+              "y": 678.890625,
+              "w": 89.984375,
+              "h": 48,
+              "right": 1235,
+              "bottom": 726.890625
+            }
+          ]
+        },
+        "stored": {
+          "version": 1,
+          "unlocked": 2,
+          "levels": [
+            {
+              "complete": true,
+              "perfect": true,
+              "best": 7.631249999999727
+            },
+            {
+              "complete": true,
+              "perfect": true,
+              "best": 8.1062499999997
+            },
+            {
+              "complete": false,
+              "perfect": false,
+              "best": null
+            }
+          ]
+        },
+        "save": "Saved on this device. Your best time and scenic stamp are safe."
+      },
+      {
+        "index": 2,
+        "id": "gardens",
+        "letters": 3,
+        "phase": "campaign-complete",
+        "observation": {
+          "phase": "campaign-complete",
+          "playerX": "2156.0937500000364",
+          "playerY": "400",
+          "grounded": "true",
+          "levelIndex": "2",
+          "collected": "[\"garden-home\",\"garden-wish\",\"garden-dawn\"]",
+          "ticks": "1003"
+        },
+        "layout": {
+          "width": 1366,
+          "height": 768,
+          "overflow": false,
+          "boxes": [
+            {
+              "sel": "#world",
+              "x": 132,
+              "y": 191.890625,
+              "w": 1102,
+              "h": 456,
+              "right": 1234,
+              "bottom": 647.890625
+            },
+            {
+              "sel": "[data-input=left]",
+              "x": 131,
+              "y": 678.890625,
+              "w": 60,
+              "h": 48,
+              "right": 191,
+              "bottom": 726.890625
+            },
+            {
+              "sel": "[data-input=right]",
+              "x": 199,
+              "y": 678.890625,
+              "w": 60,
+              "h": 48,
+              "right": 259,
+              "bottom": 726.890625
+            },
+            {
+              "sel": "[data-input=jump]",
+              "x": 1046.609375,
+              "y": 678.890625,
+              "w": 90.40625,
+              "h": 48,
+              "right": 1137.015625,
+              "bottom": 726.890625
+            },
+            {
+              "sel": "[data-input=dash]",
+              "x": 1145.015625,
+              "y": 678.890625,
+              "w": 89.984375,
+              "h": 48,
+              "right": 1235,
+              "bottom": 726.890625
+            }
+          ]
+        },
+        "stored": {
+          "version": 1,
+          "unlocked": 2,
+          "levels": [
+            {
+              "complete": true,
+              "perfect": true,
+              "best": 7.631249999999727
+            },
+            {
+              "complete": true,
+              "perfect": true,
+              "best": 8.1062499999997
+            },
+            {
+              "complete": true,
+              "perfect": true,
+              "best": 8.35833333333302
+            }
+          ]
+        },
+        "save": "Saved on this device. Your best time and scenic stamp are safe."
+      }
+    ],
+    "totalLetters": 9,
+    "loop": {
+      "ticks": 1548,
+      "max": 1
+    },
+    "requests": [
+      "https://aichrisz.github.io/moonlit-courier/",
+      "https://aichrisz.github.io/moonlit-courier/styles.css",
+      "https://aichrisz.github.io/moonlit-courier/levels.js",
+      "https://aichrisz.github.io/moonlit-courier/engine.js",
+      "https://aichrisz.github.io/moonlit-courier/records.js",
+      "https://aichrisz.github.io/moonlit-courier/renderer.js",
+      "https://aichrisz.github.io/moonlit-courier/audio.js",
+      "https://aichrisz.github.io/moonlit-courier/app.js"
+    ],
+    "errors": []
+  },
+  "public_native": [
+    {
+      "mode": "public",
+      "touch": false,
+      "target": "https://aichrisz.github.io/moonlit-courier/",
+      "layout": {
+        "width": 1366,
+        "height": 768,
+        "overflow": false,
+        "boxes": [
+          {
+            "sel": "#world",
+            "x": 132,
+            "y": 191.890625,
+            "w": 1102,
+            "h": 456,
+            "right": 1234,
+            "bottom": 647.890625
+          },
+          {
+            "sel": "[data-input=left]",
+            "x": 131,
+            "y": 678.890625,
+            "w": 60,
+            "h": 48,
+            "right": 191,
+            "bottom": 726.890625
+          },
+          {
+            "sel": "[data-input=right]",
+            "x": 199,
+            "y": 678.890625,
+            "w": 60,
+            "h": 48,
+            "right": 259,
+            "bottom": 726.890625
+          },
+          {
+            "sel": "[data-input=jump]",
+            "x": 1046.609375,
+            "y": 678.890625,
+            "w": 90.40625,
+            "h": 48,
+            "right": 1137.015625,
+            "bottom": 726.890625
+          },
+          {
+            "sel": "[data-input=dash]",
+            "x": 1145.015625,
+            "y": 678.890625,
+            "w": 89.984375,
+            "h": 48,
+            "right": 1235,
+            "bottom": 726.890625
+          }
+        ]
+      },
+      "start": {
+        "phase": "playing",
+        "playerX": "80",
+        "playerY": "400",
+        "grounded": "true",
+        "levelIndex": "0",
+        "collected": "[]",
+        "ticks": "5"
+      },
+      "moved": {
+        "phase": "playing",
+        "playerX": "126",
+        "playerY": "400",
+        "grounded": "true",
+        "levelIndex": "0",
+        "collected": "[]",
+        "ticks": "28"
+      },
+      "jumped": {
+        "phase": "playing",
+        "playerX": "126",
+        "playerY": "353.65625",
+        "grounded": "false",
+        "levelIndex": "0",
+        "collected": "[]",
+        "ticks": "40"
+      },
+      "dash": "Dash spent",
+      "loop": {
+        "ticks": 132,
+        "max": 1
+      },
+      "requests": [
+        "https://aichrisz.github.io/moonlit-courier/",
+        "https://aichrisz.github.io/moonlit-courier/styles.css",
+        "https://aichrisz.github.io/moonlit-courier/levels.js",
+        "https://aichrisz.github.io/moonlit-courier/engine.js",
+        "https://aichrisz.github.io/moonlit-courier/records.js",
+        "https://aichrisz.github.io/moonlit-courier/renderer.js",
+        "https://aichrisz.github.io/moonlit-courier/audio.js",
+        "https://aichrisz.github.io/moonlit-courier/app.js"
+      ],
+      "errors": []
+    },
+    {
+      "mode": "public",
+      "touch": true,
+      "target": "https://aichrisz.github.io/moonlit-courier/",
+      "layout": {
+        "width": 390,
+        "height": 844,
+        "overflow": false,
+        "boxes": [
+          {
+            "sel": "#world",
+            "x": 13,
+            "y": 167.046875,
+            "w": 364,
+            "h": 398,
+            "right": 377,
+            "bottom": 565.046875
+          },
+          {
+            "sel": "[data-input=left]",
+            "x": 12,
+            "y": 596.046875,
+            "w": 54,
+            "h": 48,
+            "right": 66,
+            "bottom": 644.046875
+          },
+          {
+            "sel": "[data-input=right]",
+            "x": 72,
+            "y": 596.046875,
+            "w": 54,
+            "h": 48,
+            "right": 126,
+            "bottom": 644.046875
+          },
+          {
+            "sel": "[data-input=jump]",
+            "x": 215.609375,
+            "y": 596.046875,
+            "w": 78.40625,
+            "h": 48,
+            "right": 294.015625,
+            "bottom": 644.046875
+          },
+          {
+            "sel": "[data-input=dash]",
+            "x": 300.015625,
+            "y": 596.046875,
+            "w": 77.984375,
+            "h": 48,
+            "right": 378,
+            "bottom": 644.046875
+          }
+        ]
+      },
+      "start": {
+        "phase": "playing",
+        "playerX": "80",
+        "playerY": "400",
+        "grounded": "true",
+        "levelIndex": "0",
+        "collected": "[]",
+        "ticks": "5"
+      },
+      "moved": {
+        "phase": "playing",
+        "playerX": "126",
+        "playerY": "400",
+        "grounded": "true",
+        "levelIndex": "0",
+        "collected": "[]",
+        "ticks": "28"
+      },
+      "jumped": {
+        "phase": "playing",
+        "playerX": "154",
+        "playerY": "347.390625",
+        "grounded": "false",
+        "levelIndex": "0",
+        "collected": "[]",
+        "ticks": "42"
+      },
+      "dash": "Dash spent",
+      "loop": {
+        "ticks": 132,
+        "max": 1
+      },
+      "requests": [
+        "https://aichrisz.github.io/moonlit-courier/",
+        "https://aichrisz.github.io/moonlit-courier/styles.css",
+        "https://aichrisz.github.io/moonlit-courier/levels.js",
+        "https://aichrisz.github.io/moonlit-courier/engine.js",
+        "https://aichrisz.github.io/moonlit-courier/records.js",
+        "https://aichrisz.github.io/moonlit-courier/renderer.js",
+        "https://aichrisz.github.io/moonlit-courier/audio.js",
+        "https://aichrisz.github.io/moonlit-courier/app.js"
+      ],
+      "errors": []
+    }
+  ],
+  "public_audio": {
+    "method": "actual native AudioContext analyser side branch; suspended context output is zero by WebAudio semantics, raw held buffer RMS retained separately",
+    "reports": [
+      {
+        "variant": "actual",
+        "target": "https://aichrisz.github.io/moonlit-courier/",
+        "activePeakRms": 0.027338322060968742,
+        "paused": [
+          {
+            "state": "suspended",
+            "gain": 0.11999999731779099,
+            "rawRms": 0,
+            "outputRms": 0
+          }
+        ],
+        "muted": [
+          {
+            "state": "suspended",
+            "gain": 0.11999999731779099,
+            "rawRms": 0,
+            "outputRms": 0
+          }
+        ],
+        "reenabledPeakRms": 0.027913536461095557,
+        "blurred": [
+          {
+            "state": "suspended",
+            "gain": 0.11999999731779099,
+            "rawRms": 8.642388981070083e-05,
+            "outputRms": 0
+          }
+        ],
+        "errors": []
+      },
+      {
+        "variant": "missing",
+        "target": "https://aichrisz.github.io/moonlit-courier/",
+        "soundStatus": "Sound unavailable",
+        "samples": [],
+        "errors": []
+      },
+      {
+        "variant": "rejected",
+        "target": "https://aichrisz.github.io/moonlit-courier/",
+        "soundStatus": "Sound unavailable",
+        "samples": [
+          {
+            "state": "suspended",
+            "gain": 0,
+            "rawRms": 0,
+            "outputRms": 0
+          }
+        ],
+        "errors": []
+      }
+    ]
+  },
+  "public_harness_sha256": "5b345ed180429dbb20e34a5614ccddae89a66caa2197c827b85b3c294f69eb86",
+  "public_harness_strengthening": "Exact Dash spent charge plus >10px observable displacement required for desktop and touch, strengthening the nonblocking source-test weakness without changing release runtime.",
+  "initial_pages_race": "GET404/POST409 auto-enable; read back exact gh-pages source, enforced HTTPS, remote refs and built commit; no repeated deployment/source push.",
+  "limits": [
+    "Chromium touch emulation, not physical devices.",
+    "No Safari/Firefox/manual screen reader/human listening certification.",
+    "No older public deployment exists as a rollback-tested anchor."
+  ]
+}

@@ -2,7 +2,7 @@
 
 A small, handcrafted night-post adventure: cross warm-windowed rooftops, pass the clock tower, and carry the last letters through moon gardens. Original Canvas scenery and courier art; no runtime packages, remote assets, accounts or analytics.
 
-**Release status:** local implementation only. Independent parent acceptance/review and publication are separate gates; no deployed URL is claimed here. See `docs/implementation-evidence.md` for executed verification and `docs/tdd-evidence.md` for the actual development failures and fixes.
+**v1.0.0 is LIVE:** https://aichrisz.github.io/moonlit-courier/ · [source](https://github.com/aichrisz/moonlit-courier). Immutable game/tag `de7e75f`; Pages `d907f1d`. Parent48 unit/16 browser and audit0, source/build/offline complete native campaigns, fresh exact-Astra ship review,8 exact live asset matches and actual public nine-letter/three-exit campaign passed. Publication provenance/limits: `docs/deployment.md`; reproducible independent protocol: `docs/verification.md`. The91-file source ZIP remains exact `v1.0.0`, not later publication-only documentation.
 
 ## Play
 
