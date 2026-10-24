@@ -10,13 +10,15 @@
     const screen = canvas.getContext('2d');
     let c = screen;
     const dpr = Math.min(2, root.devicePixelRatio || 1);
-    if (canvas.width !== 960*dpr || canvas.height !== 540*dpr) {
-      canvas.width = 960*dpr; canvas.height = 540*dpr;
+    // Only the projection changes on a narrow device; world geometry stays frozen.
+    const viewWidth = root.matchMedia('(max-width:600px)').matches ? 720 : 960;
+    if (canvas.width !== viewWidth*dpr || canvas.height !== 540*dpr) {
+      canvas.width = viewWidth*dpr; canvas.height = 540*dpr;
     }
     c.setTransform(dpr,0,0,dpr,0,0);
     const p = palettes[s.level.theme] || palettes.city;
     const t = reduced ? 0 : seconds;
-    const camera = Math.max(0, Math.min(s.level.width-960, s.player.x-330));
+    const camera = Math.max(0, Math.min(s.level.width-viewWidth, s.player.x-viewWidth*330/960));
     const rect = (x,y,w,h,color) => { c.fillStyle=color; c.fillRect(x,y,w,h); };
     const line = (x,y,xx,yy,color,width=1) => { c.strokeStyle=color; c.lineWidth=width; c.beginPath();c.moveTo(x,y);c.lineTo(xx,yy);c.stroke(); };
     const circle = (x,y,r,color) => {c.fillStyle=color;c.beginPath();c.arc(x,y,r,0,Math.PI*2);c.fill();};

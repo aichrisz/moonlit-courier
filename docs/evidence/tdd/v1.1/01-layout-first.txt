@@ -1,0 +1,49 @@
+
+> moonlit-courier@1.0.0 test:browser
+> playwright test tests/e2e/polish.spec.cjs --workers=1
+
+
+Running 7 tests using 1 worker
+
+  ✓  1 tests/e2e/polish.spec.cjs:5:35 › same-aspect arena and reachable controls 1366x768 (2.3s)
+  ✓  2 tests/e2e/polish.spec.cjs:5:35 › same-aspect arena and reachable controls 320x740 (1.1s)
+  ✓  3 tests/e2e/polish.spec.cjs:5:35 › same-aspect arena and reachable controls 390x844 (1.2s)
+  ✓  4 tests/e2e/polish.spec.cjs:5:35 › same-aspect arena and reachable controls 768x1024 (1.8s)
+  ✓  5 tests/e2e/polish.spec.cjs:5:35 › same-aspect arena and reachable controls 1440x900 (2.2s)
+  ✘  6 tests/e2e/polish.spec.cjs:5:35 › same-aspect arena and reachable controls 844x390 (1.4s)
+  ✓  7 tests/e2e/polish.spec.cjs:19:1 › orientation changes projection without restarting or stretching (2.2s)
+
+
+  1) tests/e2e/polish.spec.cjs:5:35 › same-aspect arena and reachable controls 844x390 ─────────────
+
+    Error: expect(received).toBeGreaterThanOrEqual(expected)
+
+    Expected: >= 0
+    Received:    -0.109375
+
+      14 |  await page.screenshot({path:`artifacts/v11/${phase}-${width}x${height}.png`});
+      15 |  expect(g.w).toBeGreaterThan(0);expect(g.h).toBeGreaterThan(0);expect(Math.abs(g.box-g.backing),JSON.stringify(g)).toBeLessThan(.02);
+    > 16 |  expect(g.backing).toBeCloseTo(width<=600?720/540:960/540,2);expect(g.overflow).toBe(false);expect(g.top).toBeGreaterThanOrEqual(0);
+         |                                                                                                           ^
+      17 |  for(const b of g.buttons){expect(b.w).toBeGreaterThanOrEqual(44);expect(b.h).toBeGreaterThanOrEqual(44);expect(b.top).toBeGreaterThanOrEqual(g.top+g.h);expect(b.bottom).toBeLessThanOrEqual(height);}
+      18 | });
+      19 | test('orientation changes projection without restarting or stretching',async({page})=>{
+        at /root/projects/moonlit-courier/.worktrees/v1.1/tests/e2e/polish.spec.cjs:16:107
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/polish-same-aspect-arena-and-reachable-controls-844x390/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/polish-same-aspect-arena-and-reachable-controls-844x390/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/polish-same-aspect-arena-and-reachable-controls-844x390/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/polish-same-aspect-arena-and-reachable-controls-844x390/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/polish.spec.cjs:5:35 › same-aspect arena and reachable controls 844x390 ──────────────
+  6 passed (14.3s)

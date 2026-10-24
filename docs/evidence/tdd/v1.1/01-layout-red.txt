@@ -1,0 +1,246 @@
+
+> moonlit-courier@1.0.0 test:browser
+> playwright test tests/e2e/polish.spec.cjs --workers=1
+
+
+Running 7 tests using 1 worker
+
+  ✘  1 tests/e2e/polish.spec.cjs:5:35 › same-aspect arena and reachable controls 1366x768 (2.0s)
+  ✘  2 tests/e2e/polish.spec.cjs:5:35 › same-aspect arena and reachable controls 320x740 (1.3s)
+  ✘  3 tests/e2e/polish.spec.cjs:5:35 › same-aspect arena and reachable controls 390x844 (1.4s)
+  ✘  4 tests/e2e/polish.spec.cjs:5:35 › same-aspect arena and reachable controls 768x1024 (2.0s)
+  ✘  5 tests/e2e/polish.spec.cjs:5:35 › same-aspect arena and reachable controls 1440x900 (2.5s)
+  ✘  6 tests/e2e/polish.spec.cjs:5:35 › same-aspect arena and reachable controls 844x390 (1.6s)
+  ✘  7 tests/e2e/polish.spec.cjs:19:1 › orientation changes projection without restarting or stretching (1.3s)
+
+
+  1) tests/e2e/polish.spec.cjs:5:35 › same-aspect arena and reachable controls 1366x768 ────────────
+
+    Error: {"box":2.4166666666666665,"backing":1.7777777777777777,"w":1102,"h":456,"top":88.890625,"overflow":false,"buttons":[{"w":60,"h":48,"top":575.890625,"bottom":623.890625},{"w":60,"h":48,"top":575.890625,"bottom":623.890625},{"w":90.40625,"h":48,"top":575.890625,"bottom":623.890625},{"w":89.984375,"h":48,"top":575.890625,"bottom":623.890625}]}
+
+    expect(received).toBeLessThan(expected)
+
+    Expected: < 0.02
+    Received:   0.6388888888888888
+
+      13 |  const phase=process.env.POLISH_CAPTURE||'after';
+      14 |  await page.screenshot({path:`artifacts/v11/${phase}-${width}x${height}.png`});
+    > 15 |  expect(g.w).toBeGreaterThan(0);expect(g.h).toBeGreaterThan(0);expect(Math.abs(g.box-g.backing),JSON.stringify(g)).toBeLessThan(.02);
+         |                                                                                                                    ^
+      16 |  expect(g.backing).toBeCloseTo(width<=600?720/540:960/540,2);expect(g.overflow).toBe(false);expect(g.top).toBeGreaterThanOrEqual(0);
+      17 |  for(const b of g.buttons){expect(b.w).toBeGreaterThanOrEqual(44);expect(b.h).toBeGreaterThanOrEqual(44);expect(b.top).toBeGreaterThanOrEqual(g.top+g.h);expect(b.bottom).toBeLessThanOrEqual(height);}
+      18 | });
+        at /root/projects/moonlit-courier/.worktrees/v1.1/tests/e2e/polish.spec.cjs:15:116
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/polish-same-aspect-arena-and-reachable-controls-1366x768/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/polish-same-aspect-arena-and-reachable-controls-1366x768/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/polish-same-aspect-arena-and-reachable-controls-1366x768/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/polish-same-aspect-arena-and-reachable-controls-1366x768/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/polish.spec.cjs:5:35 › same-aspect arena and reachable controls 320x740 ─────────────
+
+    Error: {"box":0.7386934673366834,"backing":1.7777777777777777,"w":294,"h":398,"top":82.046875,"overflow":false,"buttons":[{"w":54,"h":48,"top":511.046875,"bottom":559.046875},{"w":54,"h":48,"top":511.046875,"bottom":559.046875},{"w":78.40625,"h":48,"top":511.046875,"bottom":559.046875},{"w":77.984375,"h":48,"top":511.046875,"bottom":559.046875}]}
+
+    expect(received).toBeLessThan(expected)
+
+    Expected: < 0.02
+    Received:   1.0390843104410943
+
+      13 |  const phase=process.env.POLISH_CAPTURE||'after';
+      14 |  await page.screenshot({path:`artifacts/v11/${phase}-${width}x${height}.png`});
+    > 15 |  expect(g.w).toBeGreaterThan(0);expect(g.h).toBeGreaterThan(0);expect(Math.abs(g.box-g.backing),JSON.stringify(g)).toBeLessThan(.02);
+         |                                                                                                                    ^
+      16 |  expect(g.backing).toBeCloseTo(width<=600?720/540:960/540,2);expect(g.overflow).toBe(false);expect(g.top).toBeGreaterThanOrEqual(0);
+      17 |  for(const b of g.buttons){expect(b.w).toBeGreaterThanOrEqual(44);expect(b.h).toBeGreaterThanOrEqual(44);expect(b.top).toBeGreaterThanOrEqual(g.top+g.h);expect(b.bottom).toBeLessThanOrEqual(height);}
+      18 | });
+        at /root/projects/moonlit-courier/.worktrees/v1.1/tests/e2e/polish.spec.cjs:15:116
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/polish-same-aspect-arena-and-reachable-controls-320x740/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/polish-same-aspect-arena-and-reachable-controls-320x740/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/polish-same-aspect-arena-and-reachable-controls-320x740/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/polish-same-aspect-arena-and-reachable-controls-320x740/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/e2e/polish.spec.cjs:5:35 › same-aspect arena and reachable controls 390x844 ─────────────
+
+    Error: {"box":0.914572864321608,"backing":1.7777777777777777,"w":364,"h":398,"top":167.046875,"overflow":false,"buttons":[{"w":54,"h":48,"top":596.046875,"bottom":644.046875},{"w":54,"h":48,"top":596.046875,"bottom":644.046875},{"w":78.40625,"h":48,"top":596.046875,"bottom":644.046875},{"w":77.984375,"h":48,"top":596.046875,"bottom":644.046875}]}
+
+    expect(received).toBeLessThan(expected)
+
+    Expected: < 0.02
+    Received:   0.8632049134561697
+
+      13 |  const phase=process.env.POLISH_CAPTURE||'after';
+      14 |  await page.screenshot({path:`artifacts/v11/${phase}-${width}x${height}.png`});
+    > 15 |  expect(g.w).toBeGreaterThan(0);expect(g.h).toBeGreaterThan(0);expect(Math.abs(g.box-g.backing),JSON.stringify(g)).toBeLessThan(.02);
+         |                                                                                                                    ^
+      16 |  expect(g.backing).toBeCloseTo(width<=600?720/540:960/540,2);expect(g.overflow).toBe(false);expect(g.top).toBeGreaterThanOrEqual(0);
+      17 |  for(const b of g.buttons){expect(b.w).toBeGreaterThanOrEqual(44);expect(b.h).toBeGreaterThanOrEqual(44);expect(b.top).toBeGreaterThanOrEqual(g.top+g.h);expect(b.bottom).toBeLessThanOrEqual(height);}
+      18 | });
+        at /root/projects/moonlit-courier/.worktrees/v1.1/tests/e2e/polish.spec.cjs:15:116
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/polish-same-aspect-arena-and-reachable-controls-390x844/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/polish-same-aspect-arena-and-reachable-controls-390x844/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/polish-same-aspect-arena-and-reachable-controls-390x844/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/polish-same-aspect-arena-and-reachable-controls-390x844/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) tests/e2e/polish.spec.cjs:5:35 › same-aspect arena and reachable controls 768x1024 ────────────
+
+    Error: {"box":1.25,"backing":1.7777777777777777,"w":710,"h":568,"top":191.890625,"overflow":false,"buttons":[{"w":60,"h":48,"top":790.890625,"bottom":838.890625},{"w":60,"h":48,"top":790.890625,"bottom":838.890625},{"w":90.40625,"h":48,"top":790.890625,"bottom":838.890625},{"w":89.984375,"h":48,"top":790.890625,"bottom":838.890625}]}
+
+    expect(received).toBeLessThan(expected)
+
+    Expected: < 0.02
+    Received:   0.5277777777777777
+
+      13 |  const phase=process.env.POLISH_CAPTURE||'after';
+      14 |  await page.screenshot({path:`artifacts/v11/${phase}-${width}x${height}.png`});
+    > 15 |  expect(g.w).toBeGreaterThan(0);expect(g.h).toBeGreaterThan(0);expect(Math.abs(g.box-g.backing),JSON.stringify(g)).toBeLessThan(.02);
+         |                                                                                                                    ^
+      16 |  expect(g.backing).toBeCloseTo(width<=600?720/540:960/540,2);expect(g.overflow).toBe(false);expect(g.top).toBeGreaterThanOrEqual(0);
+      17 |  for(const b of g.buttons){expect(b.w).toBeGreaterThanOrEqual(44);expect(b.h).toBeGreaterThanOrEqual(44);expect(b.top).toBeGreaterThanOrEqual(g.top+g.h);expect(b.bottom).toBeLessThanOrEqual(height);}
+      18 | });
+        at /root/projects/moonlit-courier/.worktrees/v1.1/tests/e2e/polish.spec.cjs:15:116
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/polish-same-aspect-arena-and-reachable-controls-768x1024/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/polish-same-aspect-arena-and-reachable-controls-768x1024/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/polish-same-aspect-arena-and-reachable-controls-768x1024/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/polish-same-aspect-arena-and-reachable-controls-768x1024/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) tests/e2e/polish.spec.cjs:5:35 › same-aspect arena and reachable controls 1440x900 ────────────
+
+    Error: {"box":1.9401408450704225,"backing":1.7777777777777777,"w":1102,"h":568,"top":108.890625,"overflow":false,"buttons":[{"w":60,"h":48,"top":707.890625,"bottom":755.890625},{"w":60,"h":48,"top":707.890625,"bottom":755.890625},{"w":90.40625,"h":48,"top":707.890625,"bottom":755.890625},{"w":89.984375,"h":48,"top":707.890625,"bottom":755.890625}]}
+
+    expect(received).toBeLessThan(expected)
+
+    Expected: < 0.02
+    Received:   0.16236306729264482
+
+      13 |  const phase=process.env.POLISH_CAPTURE||'after';
+      14 |  await page.screenshot({path:`artifacts/v11/${phase}-${width}x${height}.png`});
+    > 15 |  expect(g.w).toBeGreaterThan(0);expect(g.h).toBeGreaterThan(0);expect(Math.abs(g.box-g.backing),JSON.stringify(g)).toBeLessThan(.02);
+         |                                                                                                                    ^
+      16 |  expect(g.backing).toBeCloseTo(width<=600?720/540:960/540,2);expect(g.overflow).toBe(false);expect(g.top).toBeGreaterThanOrEqual(0);
+      17 |  for(const b of g.buttons){expect(b.w).toBeGreaterThanOrEqual(44);expect(b.h).toBeGreaterThanOrEqual(44);expect(b.top).toBeGreaterThanOrEqual(g.top+g.h);expect(b.bottom).toBeLessThanOrEqual(height);}
+      18 | });
+        at /root/projects/moonlit-courier/.worktrees/v1.1/tests/e2e/polish.spec.cjs:15:116
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/polish-same-aspect-arena-and-reachable-controls-1440x900/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/polish-same-aspect-arena-and-reachable-controls-1440x900/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/polish-same-aspect-arena-and-reachable-controls-1440x900/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/polish-same-aspect-arena-and-reachable-controls-1440x900/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) tests/e2e/polish.spec.cjs:5:35 › same-aspect arena and reachable controls 844x390 ─────────────
+
+    Error: {"box":3.046511627906977,"backing":1.7777777777777777,"w":786,"h":258,"top":0.890625,"overflow":false,"buttons":[{"w":60,"h":48,"top":289.890625,"bottom":337.890625},{"w":60,"h":48,"top":289.890625,"bottom":337.890625},{"w":90.40625,"h":48,"top":289.890625,"bottom":337.890625},{"w":89.984375,"h":48,"top":289.890625,"bottom":337.890625}]}
+
+    expect(received).toBeLessThan(expected)
+
+    Expected: < 0.02
+    Received:   1.2687338501291991
+
+      13 |  const phase=process.env.POLISH_CAPTURE||'after';
+      14 |  await page.screenshot({path:`artifacts/v11/${phase}-${width}x${height}.png`});
+    > 15 |  expect(g.w).toBeGreaterThan(0);expect(g.h).toBeGreaterThan(0);expect(Math.abs(g.box-g.backing),JSON.stringify(g)).toBeLessThan(.02);
+         |                                                                                                                    ^
+      16 |  expect(g.backing).toBeCloseTo(width<=600?720/540:960/540,2);expect(g.overflow).toBe(false);expect(g.top).toBeGreaterThanOrEqual(0);
+      17 |  for(const b of g.buttons){expect(b.w).toBeGreaterThanOrEqual(44);expect(b.h).toBeGreaterThanOrEqual(44);expect(b.top).toBeGreaterThanOrEqual(g.top+g.h);expect(b.bottom).toBeLessThanOrEqual(height);}
+      18 | });
+        at /root/projects/moonlit-courier/.worktrees/v1.1/tests/e2e/polish.spec.cjs:15:116
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/polish-same-aspect-arena-and-reachable-controls-844x390/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/polish-same-aspect-arena-and-reachable-controls-844x390/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/polish-same-aspect-arena-and-reachable-controls-844x390/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/polish-same-aspect-arena-and-reachable-controls-844x390/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) tests/e2e/polish.spec.cjs:19:1 › orientation changes projection without restarting or stretching 
+
+    Error: expect(received).toBeLessThan(expected)
+
+    Expected: < 0.02
+    Received:   0.8632049134561697
+
+      22 |   await page.setViewportSize({width,height});await page.clock.runFor(32);
+      23 |   const r=await page.locator('#world').evaluate(c=>({box:c.clientWidth/c.clientHeight,back:c.width/c.height}));
+    > 24 |   expect(Math.abs(r.box-r.back)).toBeLessThan(.02);expect(r.back).toBeCloseTo(width<=600?4/3:16/9,2);expect((await pos(page)).x).toBe(before.x);
+         |                                  ^
+      25 |  }
+      26 | });
+      27 |
+        at /root/projects/moonlit-courier/.worktrees/v1.1/tests/e2e/polish.spec.cjs:24:34
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/polish-orientation-changes-57527-ut-restarting-or-stretching/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/polish-orientation-changes-57527-ut-restarting-or-stretching/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/polish-orientation-changes-57527-ut-restarting-or-stretching/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/polish-orientation-changes-57527-ut-restarting-or-stretching/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7 failed
+    tests/e2e/polish.spec.cjs:5:35 › same-aspect arena and reachable controls 1366x768 ─────────────
+    tests/e2e/polish.spec.cjs:5:35 › same-aspect arena and reachable controls 320x740 ──────────────
+    tests/e2e/polish.spec.cjs:5:35 › same-aspect arena and reachable controls 390x844 ──────────────
+    tests/e2e/polish.spec.cjs:5:35 › same-aspect arena and reachable controls 768x1024 ─────────────
+    tests/e2e/polish.spec.cjs:5:35 › same-aspect arena and reachable controls 1440x900 ─────────────
+    tests/e2e/polish.spec.cjs:5:35 › same-aspect arena and reachable controls 844x390 ──────────────
+    tests/e2e/polish.spec.cjs:19:1 › orientation changes projection without restarting or stretching 
