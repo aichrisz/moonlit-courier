@@ -1,0 +1,46 @@
+
+> moonlit-courier@1.0.0 test:browser
+> playwright test tests/e2e/polish.spec.cjs --grep Canvas|illustrated --workers=1
+
+
+Running 3 tests using 1 worker
+
+  ✘  1 tests/e2e/polish.spec.cjs:4:1 › real Canvas uses four independent cached planes, stable pixels and bounded route cycling (5.5s)
+  ✓  2 tests/e2e/polish.spec.cjs:25:31 › native illustrated three-theme campaign 1366 (1.4m)
+  ✓  3 tests/e2e/polish.spec.cjs:25:31 › native illustrated three-theme campaign 390 (1.0m)
+
+
+  1) tests/e2e/polish.spec.cjs:4:1 › real Canvas uses four independent cached planes, stable pixels and bounded route cycling 
+
+    Error: expect(received).toHaveLength(expected)
+
+    Expected length: 4
+    Received length: 1
+    Received array:  [{"h": 540, "image": 0, "w": 1600, "x": -0}]
+
+      16 |   return {a,b,quiet,stable,immutable:before===JSON.stringify(s),images:images.size};
+      17 |  });
+    > 18 |  expect(r.a).toHaveLength(4);expect(new Set(r.a.map(p=>p.image)).size).toBe(4);
+         |              ^
+      19 |  expect(r.a.map(p=>p.image)).toEqual(r.b.map(p=>p.image));
+      20 |  const shifts=r.b.map((p,i)=>p.x-r.a[i].x);expect(shifts[0]).toBe(0);expect(new Set(shifts).size).toBe(4);
+      21 |  expect(shifts.slice(1).every(x=>x<0)).toBe(true);expect(r.quiet.every(p=>p.x===0)).toBe(true);
+        at /root/projects/moonlit-courier/.worktrees/v1.1/tests/e2e/polish.spec.cjs:18:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/polish-real-Canvas-uses-fo-437fb-s-and-bounded-route-cycling/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/polish-real-Canvas-uses-fo-437fb-s-and-bounded-route-cycling/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/polish-real-Canvas-uses-fo-437fb-s-and-bounded-route-cycling/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/polish-real-Canvas-uses-fo-437fb-s-and-bounded-route-cycling/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/polish.spec.cjs:4:1 › real Canvas uses four independent cached planes, stable pixels and bounded route cycling 
+  2 passed (2.5m)

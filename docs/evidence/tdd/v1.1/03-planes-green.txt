@@ -1,0 +1,21 @@
+
+> moonlit-courier@1.0.0 test:browser
+> playwright test tests/e2e/polish.spec.cjs --workers=1
+
+
+Running 12 tests using 1 worker
+
+  ✓   1 tests/e2e/polish.spec.cjs:4:1 › real Canvas uses four independent cached planes, stable pixels and bounded route cycling (9.3s)
+  ✓   2 tests/e2e/polish.spec.cjs:25:31 › native illustrated three-theme campaign 1366 (2.6m)
+  ✓   3 tests/e2e/polish.spec.cjs:25:31 › native illustrated three-theme campaign 390 (1.9m)
+  ✓   4 tests/e2e/polish.spec.cjs:33:40 › real keyboard air dash spends readiness and displaces courier (2.5s)
+  ✓   5 tests/e2e/polish.spec.cjs:33:40 › real touch air dash spends readiness and displaces courier (2.8s)
+  ✓   6 tests/e2e/polish.spec.cjs:48:35 › same-aspect arena and reachable controls 1366x768 (2.4s)
+  ✓   7 tests/e2e/polish.spec.cjs:48:35 › same-aspect arena and reachable controls 320x740 (1.3s)
+  ✓   8 tests/e2e/polish.spec.cjs:48:35 › same-aspect arena and reachable controls 390x844 (1.4s)
+  ✓   9 tests/e2e/polish.spec.cjs:48:35 › same-aspect arena and reachable controls 768x1024 (2.1s)
+  ✓  10 tests/e2e/polish.spec.cjs:48:35 › same-aspect arena and reachable controls 1440x900 (2.5s)
+  ✓  11 tests/e2e/polish.spec.cjs:48:35 › same-aspect arena and reachable controls 844x390 (1.6s)
+  ✓  12 tests/e2e/polish.spec.cjs:62:1 › orientation changes projection without restarting or stretching (2.3s)
+
+  12 passed (5.0m)
