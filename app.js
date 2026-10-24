@@ -9,6 +9,7 @@
   let phase = 'ready', last = null, accumulator = 0;
   let keys = new Set(), edges = {jumpPressed:false,dashPressed:false};
   const canvas = $('world');
+  const feedback = MCRenderer.createFeedback();
   const audio = MCAudio.createAudio(globalThis,message=>{$('sound-status').textContent=message;});
   $('sound').addEventListener('change',()=>{void audio.enable($('sound').checked);});
   const moves = {ArrowLeft:'left',KeyA:'left',ArrowRight:'right',KeyD:'right',Space:'jump',KeyW:'jump',ArrowUp:'jump',ShiftLeft:'dash',ShiftRight:'dash',KeyX:'dash'};
@@ -69,7 +70,8 @@
     select.value=String(s.levelIndex);
     const record=records.levels[s.levelIndex];
     $('record-summary').textContent=record.complete?`Best ${record.best.toFixed(1)}s · ${record.perfect?'perfect stamp':'delivered'}`:'No delivery record yet.';
-    MCRenderer.draw(canvas,s,s.elapsed,$('reduced-motion').checked);
+    feedback.observe(s,$('reduced-motion').checked);
+    MCRenderer.draw(canvas,s,s.elapsed,$('reduced-motion').checked,feedback.snapshot());
   }
   function completed() {
     try {
@@ -132,6 +134,8 @@
       while(accumulator+1e-9>=CONSTANTS.STEP && phase==='playing'){
         const held=[...[...keys].map(k=>moves[k]), ...[...pointers.values()].map(b=>b.dataset.input)];
         stepGame(game,{left:held.includes('left'),right:held.includes('right'),...edges},CONSTANTS.STEP);
+        // Presentation observes every true edge, including short events between paints.
+        feedback.observe(snapshot(game),$('reduced-motion').checked);
         edges={jumpPressed:false,dashPressed:false};accumulator-=CONSTANTS.STEP;
         for(const event of game.events)audio.play(event);
         if(game.events.includes('respawn'))release();

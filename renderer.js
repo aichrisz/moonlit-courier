@@ -5,8 +5,43 @@
     clock: { sky: '#211d3a', horizon: '#675275', far: '#3d3555', near: '#2b2845', roof: '#39344e', trim: '#cda174', glow: '#ffd58c' },
     garden: { sky: '#112f3b', horizon: '#547878', far: '#234f57', near: '#183e49', roof: '#294e54', trim: '#97c5ad', glow: '#daf0b3' }
   };
+  // Isolated presentation memory: no reference to the game, clock or DOM. The app
+  // observes every accepted tick so short edges cannot disappear between paints.
+  function createFeedback() {
+    const capacity=64;
+    let previous=null, particles=[], landing=0;
+    function observe(s,reduced=false) {
+      const q=s.player;
+      if(!previous || previous.level!==s.levelIndex || s.ticks<previous.tick || s.elapsed<previous.time) {
+        particles=[];landing=0;previous=null;
+      }
+      if(reduced){particles=[];landing=0;}
+      if(previous && s.ticks!==previous.tick) {
+        const dt=Math.max(0,s.elapsed-previous.time);
+        particles=particles.map(p=>({...p,age:p.age+dt})).filter(p=>p.age<p.life);
+        landing=Math.max(0,landing-dt);
+        if(s.deaths!==previous.deaths){particles=[];landing=0;}
+        const burst=(kind,x,y,count=8)=>{
+          if(reduced)return;
+          for(let i=0;i<count;i++){
+            const angle=(i/count)*Math.PI*2;
+            particles.push({kind,x,y,age:0,life:kind==='delivery'?1.1:.55,i,
+              vx:Math.cos(angle)*(kind==='dash'?50:28),vy:Math.sin(angle)*26-15});
+          }
+          if(particles.length>capacity)particles.splice(0,particles.length-capacity);
+        };
+        for(const letter of s.level.letters)if(s.collected.includes(letter.id)&&!previous.collected.includes(letter.id))burst('pickup',letter.x,letter.y,10);
+        if(previous.ready&&!q.dashReady)burst('dash',q.x+q.w/2,q.y+20);
+        if(!previous.grounded&&q.grounded&&previous.vy>0&&s.deaths===previous.deaths){burst('landing',q.x+q.w/2,q.y+q.h,6);if(!reduced)landing=.16;}
+        if(s.checkpointId&&s.checkpointId!==previous.checkpoint)burst('checkpoint',q.x+q.w/2,q.y,12);
+        if(s.phase==='level-complete'&&previous.phase!==s.phase)burst('delivery',s.level.exit.x+22,s.level.exit.y+10,20);
+      }
+      previous={level:s.levelIndex,tick:s.ticks,time:s.elapsed,collected:[...s.collected],ready:q.dashReady,grounded:q.grounded,vy:q.vy,checkpoint:s.checkpointId,phase:s.phase,deaths:s.deaths};
+    }
+    return Object.freeze({capacity,observe,snapshot:()=>({particles:particles.map(p=>({...p})),landing})});
+  }
   const backdrops = new Map();
-  function draw(canvas, s, seconds, reduced) {
+  function draw(canvas, s, seconds, reduced, feedback={particles:[],landing:0}) {
     const screen = canvas.getContext('2d');
     let c = screen;
     const dpr = Math.min(2, root.devicePixelRatio || 1);
@@ -99,6 +134,16 @@
     glow(ex.x+22,ex.y+20,60,open?'#e6c07e40':'#98c4d018');rect(ex.x+18,ex.y+38,8,22,p.trim);
     c.fillStyle=open?'#c08a58':'#597583';c.beginPath();c.roundRect(ex.x,ex.y,44,44,[19,19,4,4]);c.fill();
     rect(ex.x+7,ex.y+16,30,5,'#14283b');rect(ex.x+12,ex.y+29,20,9,'#e6cd9d');text('POST',ex.x+13,ex.y+36,'#24374b',7);text(open?'DELIVER →':'2 LETTERS TO OPEN',ex.x-35,ex.y-17,'#ffe1aa',11);
+    // Finite ink flecks / postmark rings. Drawing cannot create or age an effect.
+    if(!reduced)for(const f of feedback.particles){
+      const a=f.age/f.life,fx=f.x+f.vx*f.age,fy=f.y+f.vy*f.age;
+      c.globalAlpha=(1-a)*.85;
+      if(f.kind==='landing')line(fx-3,fy,fx+3,fy,'#d9c9a7',1.5);
+      else if(f.kind==='dash')line(fx-10,fy,fx+2,fy,'#c6e6dc',2);
+      else{c.save();c.translate(fx,fy);c.rotate(f.i+f.age);rect(-2,-2,4,4,f.kind==='checkpoint'?'#b9dbbf':p.glow);c.restore();}
+      if(f.i===0&&f.kind!=='landing'&&f.kind!=='dash'){c.strokeStyle=p.glow;c.lineWidth=1.4;c.beginPath();c.arc(f.x,f.y,12+a*28,0,Math.PI*2);c.stroke();}
+    }
+    c.globalAlpha=1;
     // Courier: cap, face, satchel, articulated boots and a wind-drawn red scarf.
     const q=s.player,x=q.x+q.w/2,y=q.y,walk=q.grounded&&Math.abs(q.vx)>1?Math.sin(t*18):0;
     c.save();c.translate(x,y+20);c.scale(q.facing,1);
@@ -112,5 +157,7 @@
     const vignette=c.createRadialGradient(480,260,160,480,260,600);vignette.addColorStop(0,'transparent');vignette.addColorStop(1,'#09142465');c.fillStyle=vignette;c.fillRect(0,0,960,540);
     text('NIGHT POST / '+s.level.name.toUpperCase(),23,29,'#e1dac2',10);
   }
-  root.MCRenderer=Object.freeze({draw});
+  const api=Object.freeze({draw,createFeedback});
+  if(typeof module==='object'&&module.exports)module.exports=api;
+  else root.MCRenderer=api;
 })(globalThis);

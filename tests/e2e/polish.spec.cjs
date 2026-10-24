@@ -1,6 +1,20 @@
 const {test,expect}=require('@playwright/test');
 const {setup,start,pos,route}=require('./helpers.cjs');
 const fs=require('node:fs');
+for(const mode of ['keyboard','touch'])test(`real ${mode} air dash spends readiness and displaces courier`,async({page})=>{
+ await setup(page);await start(page);let cdp;
+ if(mode==='keyboard'){await page.keyboard.press('Space');await page.clock.runFor(100);}
+ else{
+  cdp=await page.context().newCDPSession(page);const r=await page.locator('[data-input=jump]').boundingBox();
+  await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:r.x+r.width/2,y:r.y+r.height/2,id:1}]});await page.clock.runFor(100);
+  await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+ }
+ await expect(page.locator('#world')).toHaveAttribute('data-grounded','false');const before=await pos(page);
+ if(mode==='keyboard')await page.keyboard.press('x');
+ else{const r=await page.locator('[data-input=dash]').boundingBox();await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:r.x+r.width/2,y:r.y+r.height/2,id:2}]});}
+ await page.clock.runFor(50);await expect(page.locator('#dash-status')).toHaveText('Dash spent');expect((await pos(page)).x-before.x).toBeGreaterThan(10);
+ if(cdp)await cdp.send('Input.dispatchTouchEvent',{type:'touchCancel',touchPoints:[]});
+});
 const sizes=[[1366,768],[320,740],[390,844],[768,1024],[1440,900],[844,390]];
 for(const [width,height] of sizes)test(`same-aspect arena and reachable controls ${width}x${height}`,async({page})=>{
  await page.setViewportSize({width,height});await setup(page);await start(page);
