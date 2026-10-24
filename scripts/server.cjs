@@ -18,4 +18,6 @@ server.listen(4173,'127.0.0.1');
 const close=()=>server.close(()=>process.exit(0));
 process.on('SIGTERM',close);process.on('SIGINT',close);
 // Local testing only: even an abandoned runner cannot leave a persistent service.
-setTimeout(close,10*60*1000).unref();
+// Full three-target visual campaigns can exceed ten minutes on software Canvas.
+// Still bounded and loopback-only; Playwright terminates this process on completion.
+setTimeout(close,30*60*1000).unref();

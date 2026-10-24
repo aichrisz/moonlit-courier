@@ -14,10 +14,16 @@
   <header class="masthead"><div><p class="eyebrow">THE NIGHT POST · EST. 1924</p><h1>Moonlit Courier<span aria-hidden="true"> ✦</span></h1></div><p class="edition">THREE STOPS<br>BEFORE DAWN</p></header>
   <section class="game" aria-label="Moonlit Courier game">
     <div class="route-heading"><div><span class="eyebrow" id="route-number">ROUTE 01 / 03</span><h2 id="level-name">Lantern Rooftops</h2></div><button id="pause" hidden>Pause <span aria-hidden="true">Ⅱ</span></button></div>
-    <div class="hud" aria-label="Delivery progress"><span id="letters">Post 0 / 2 required</span><span id="bonus">Scenic 0 / 1 optional</span><span id="dash-status">Dash ready</span><span id="elapsed">0.0s</span><span id="deaths">Returns 0</span></div>
+    <div class="hud" aria-label="Delivery progress">
+      <div class="post-group" role="group" aria-label="Required post letters"><div class="envelopes"><span data-letter-slot="required-0" role="img" aria-label="Required letter 1: awaiting pickup"></span><span data-letter-slot="required-1" role="img" aria-label="Required letter 2: awaiting pickup"></span></div><span id="letters">Post 0 / 2 required</span></div>
+      <div class="post-group scenic" role="group" aria-label="Optional scenic letter"><div class="envelopes"><span data-letter-slot="optional" role="img" aria-label="Scenic letter: awaiting pickup"></span></div><span id="bonus">Scenic 0 / 1 optional</span></div>
+      <div class="dash-group"><span id="dash-meter" role="meter" aria-label="Air dash charge" aria-valuemin="0" aria-valuemax="1" aria-valuenow="1" aria-valuetext="Ready; one air dash"><i aria-hidden="true"></i></span><span id="dash-status">Dash ready</span></div>
+      <span id="elapsed">0.0s</span><span id="deaths">Returns 0</span>
+    </div>
     <div class="stage">
       <canvas id="world" width="960" height="540" tabindex="0" aria-label="Courier world. Use left and right, Space to jump, X to dash." aria-describedby="instructions" data-phase="ready">A visual platform adventure. Controls and progress are also provided as text below.</canvas>
       <section class="overlay" id="panel" aria-labelledby="panel-title">
+        <span id="delivery-stamp" hidden>DELIVERED</span>
         <p class="eyebrow" id="panel-kicker">A SMALL ADVENTURE AFTER DARK</p><h2 id="panel-title">Some wishes<br>travel by moonlight.</h2>
         <p id="panel-description">Two letters open the mailbox. Take the scenic route for a third, perfect-delivery letter.</p>
         <div class="actions"><button id="start" class="primary">Begin delivery →</button><button id="resume" class="primary" hidden>Resume delivery →</button><button id="restart" hidden>Restart this route</button><button id="next" class="primary" hidden>Next neighbourhood →</button><button id="replay" hidden>Replay the night →</button></div>

@@ -1,0 +1,14 @@
+
+> moonlit-courier@1.0.0 test:browser
+> playwright test tests/e2e/polish.spec.cjs --grep semantic|truthful|mail-card --workers=1
+
+
+Running 5 tests using 1 worker
+
+  ✓  1 tests/e2e/polish.spec.cjs:16:1 › semantic envelopes mirror genuine pickups and discrete dash charge (11.0s)
+  ✓  2 tests/e2e/polish.spec.cjs:27:34 › truthful perfect postmark despite failed save (49.3s)
+  ✓  3 tests/e2e/polish.spec.cjs:27:34 › truthful ordinary postmark despite failed save (49.2s)
+  ✓  4 tests/e2e/polish.spec.cjs:35:51 › mail-card content reachable at 320x740 (37.1s)
+  ✓  5 tests/e2e/polish.spec.cjs:35:51 › mail-card content reachable at 844x390 (48.8s)
+
+  5 passed (3.3m)

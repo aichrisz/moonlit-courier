@@ -1,0 +1,132 @@
+
+> moonlit-courier@1.0.0 test:browser
+> playwright test tests/e2e/polish.spec.cjs --grep semantic|truthful|mail-card --workers=1
+
+
+Running 5 tests using 1 worker
+
+  ✘  1 tests/e2e/polish.spec.cjs:16:1 › semantic envelopes mirror genuine pickups and discrete dash charge (5.1s)
+  ✘  2 tests/e2e/polish.spec.cjs:27:34 › truthful perfect postmark despite failed save (51.9s)
+  ✘  3 tests/e2e/polish.spec.cjs:27:34 › truthful ordinary postmark despite failed save (52.1s)
+  ✓  4 tests/e2e/polish.spec.cjs:35:51 › mail-card content reachable at 320x740 (37.2s)
+  ✓  5 tests/e2e/polish.spec.cjs:35:51 › mail-card content reachable at 844x390 (48.4s)
+
+
+  1) tests/e2e/polish.spec.cjs:16:1 › semantic envelopes mirror genuine pickups and discrete dash charge 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('[data-letter-slot]')
+    Expected: 3
+    Received: 0
+    Timeout:  3000ms
+
+    Call log:
+      - Expect "toHaveCount" locator('[data-letter-slot]') with timeout 3000ms
+      - waiting for locator('[data-letter-slot]')
+        10 × locator resolved to 0 elements
+           - unexpected value "0"
+
+
+      15 | }
+      16 | test('semantic envelopes mirror genuine pickups and discrete dash charge',async({page})=>{
+    > 17 |  await setup(page);await start(page);await expect(page.locator('[data-letter-slot]')).toHaveCount(3);
+         |                                                                                       ^
+      18 |  await expect(page.getByRole('group',{name:'Required post letters'}).locator('[data-letter-slot]')).toHaveCount(2);
+      19 |  await expect(page.getByRole('group',{name:'Optional scenic letter'}).locator('[data-letter-slot]')).toHaveCount(1);
+      20 |  await expect(page.locator('[data-letter-slot][data-collected=true]')).toHaveCount(0);
+        at /root/projects/moonlit-courier/.worktrees/v1.1/tests/e2e/polish.spec.cjs:17:87
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/polish-semantic-envelopes--61c71-ps-and-discrete-dash-charge/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/polish-semantic-envelopes--61c71-ps-and-discrete-dash-charge/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/polish-semantic-envelopes--61c71-ps-and-discrete-dash-charge/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/polish-semantic-envelopes--61c71-ps-and-discrete-dash-charge/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/polish.spec.cjs:27:34 › truthful perfect postmark despite failed save ───────────────
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator: locator('#delivery-stamp')
+    Expected: "PERFECT DELIVERY"
+    Timeout: 3000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveText" locator('#delivery-stamp') with timeout 3000ms
+      - waiting for locator('#delivery-stamp')
+
+
+      28 |  await page.addInitScript(()=>{Storage.prototype.setItem=function(){throw new DOMException('Denied','QuotaExceededError');};});
+      29 |  await setup(page);await start(page);await delivery(page,scenic);
+    > 30 |  await expect(page.locator('#delivery-stamp')).toHaveText(scenic?'PERFECT DELIVERY':'DELIVERED');
+         |                                                ^
+      31 |  expect(JSON.parse(await page.locator('#world').getAttribute('data-collected'))).toHaveLength(scenic?3:2);
+      32 |  await expect(page.locator('#save-status')).toBeVisible();await expect(page.locator('#save-status')).toContainText('Not saved');
+      33 |  await page.screenshot({path:`artifacts/v11/result-${scenic?'perfect':'ordinary'}.png`});
+        at /root/projects/moonlit-courier/.worktrees/v1.1/tests/e2e/polish.spec.cjs:30:48
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/polish-truthful-perfect-postmark-despite-failed-save/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/polish-truthful-perfect-postmark-despite-failed-save/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/polish-truthful-perfect-postmark-despite-failed-save/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/polish-truthful-perfect-postmark-despite-failed-save/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/e2e/polish.spec.cjs:27:34 › truthful ordinary postmark despite failed save ──────────────
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator: locator('#delivery-stamp')
+    Expected: "DELIVERED"
+    Timeout: 3000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveText" locator('#delivery-stamp') with timeout 3000ms
+      - waiting for locator('#delivery-stamp')
+
+
+      28 |  await page.addInitScript(()=>{Storage.prototype.setItem=function(){throw new DOMException('Denied','QuotaExceededError');};});
+      29 |  await setup(page);await start(page);await delivery(page,scenic);
+    > 30 |  await expect(page.locator('#delivery-stamp')).toHaveText(scenic?'PERFECT DELIVERY':'DELIVERED');
+         |                                                ^
+      31 |  expect(JSON.parse(await page.locator('#world').getAttribute('data-collected'))).toHaveLength(scenic?3:2);
+      32 |  await expect(page.locator('#save-status')).toBeVisible();await expect(page.locator('#save-status')).toContainText('Not saved');
+      33 |  await page.screenshot({path:`artifacts/v11/result-${scenic?'perfect':'ordinary'}.png`});
+        at /root/projects/moonlit-courier/.worktrees/v1.1/tests/e2e/polish.spec.cjs:30:48
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/polish-truthful-ordinary-postmark-despite-failed-save/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/polish-truthful-ordinary-postmark-despite-failed-save/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/polish-truthful-ordinary-postmark-despite-failed-save/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/polish-truthful-ordinary-postmark-despite-failed-save/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    tests/e2e/polish.spec.cjs:16:1 › semantic envelopes mirror genuine pickups and discrete dash charge 
+    tests/e2e/polish.spec.cjs:27:34 › truthful perfect postmark despite failed save ────────────────
+    tests/e2e/polish.spec.cjs:27:34 › truthful ordinary postmark despite failed save ───────────────
+  2 passed (3.3m)

@@ -45,9 +45,23 @@
     $('letters').textContent = `Post ${main} / 2 required`;
     $('bonus').textContent = `Scenic ${bonus} / 1 optional`;
     $('dash-status').textContent = p.dashReady ? 'Dash ready' : 'Dash spent';
+    // These slots describe collected IDs, not position or a guessed progress meter.
+    const required=s.level.letters.filter(l=>!l.optional);
+    for(const slot of document.querySelectorAll('[data-letter-slot]')){
+      const optional=slot.dataset.letterSlot==='optional';
+      const letter=optional?s.level.letters.find(l=>l.optional):required[Number(slot.dataset.letterSlot.at(-1))];
+      const collected=s.collected.includes(letter.id);
+      slot.dataset.collected=String(collected);
+      slot.setAttribute('aria-label',`${optional?'Scenic letter':'Required letter '+(required.indexOf(letter)+1)}: ${collected?'collected':'awaiting pickup'}`);
+    }
+    $('dash-meter').setAttribute('aria-valuenow',p.dashReady?'1':'0');
+    $('dash-meter').setAttribute('aria-valuetext',p.dashReady?'Ready; one air dash':'Spent; land to restore');
     $('elapsed').textContent = s.elapsed.toFixed(1)+'s';
     $('deaths').textContent = 'Returns '+s.deaths;
     const results = phase==='level-complete'||phase==='campaign-complete';
+    $('panel').dataset.phase=phase;
+    $('delivery-stamp').hidden=!results;
+    $('delivery-stamp').textContent=bonus?'PERFECT DELIVERY':'DELIVERED';
     $('panel').hidden = phase==='playing';
     for (const [id,show] of Object.entries({start:phase==='ready',resume:phase==='paused',restart:phase==='paused',next:phase==='level-complete',replay:phase==='campaign-complete',pause:phase==='playing',selection:phase==='ready'})) $(id).hidden=!show;
     if(phase==='ready') {

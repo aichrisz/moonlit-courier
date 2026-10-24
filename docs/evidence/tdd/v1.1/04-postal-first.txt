@@ -1,0 +1,13 @@
+
+> moonlit-courier@1.0.0 test:browser
+> playwright test
+
+
+Running 33 tests using 1 worker
+
+  ✓   1 tests/e2e/campaign.spec.cjs:4:1 › source native complete campaign: all nine letters, all exits, persistent records and replay (2.6m)
+  ✓   2 tests/e2e/campaign.spec.cjs:15:1 › actual results show denied writes, session unlock still works (48.9s)
+  ✓   3 tests/e2e/campaign.spec.cjs:19:84 › layout and real screenshots 320x568 DPR2 (37.7s)
+  ✓   4 tests/e2e/campaign.spec.cjs:19:84 › layout and real screenshots 390x844 DPR2 (38.3s)
+  ✓   5 tests/e2e/campaign.spec.cjs:19:84 › layout and real screenshots 768x1024 DPR2 (51.2s)
+  ✓   6 tests/e2e/campaign.spec.cjs:19:84 › layout and real screenshots 1366x768 DPR2 (52.6s)
