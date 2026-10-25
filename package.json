@@ -1,5 +1,5 @@
 {
-  "name": "moonlit-courier", "version": "1.0.0", "private": true,
+  "name": "moonlit-courier", "version": "1.1.0", "private": true,
   "description": "Three handcrafted nights of rooftop deliveries", "license": "MIT",
   "scripts": {
     "check": "node scripts/check.cjs", "build": "node scripts/build.cjs",

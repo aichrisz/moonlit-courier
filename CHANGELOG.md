@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.1.0 — 2026-10-24 (local candidate; not yet published)
+
+- Same-aspect arena with a render-only 4:3 phone view; no internal portrait bands or stretched scenery, with scrolling overlays and 44px-or-larger controls.
+- Original illustrated lantern street, XIII clock tower and hanging moon gardens on four separately cached, independently translated planes.
+- Contrasting courier coat/cap/satchel, articulated stride/rise/fall/landing poses and bounded simulation-edge postal feedback. Less decoration removes optional animation without changing play.
+- Two required envelope slots and a separate scenic slot, discrete ready/spent dash charge, cream mail-card start/pause/results and truthful ordinary/perfect postmarks.
+- New pure feedback contracts and native visual tests; original tests retained unchanged. No new dependencies/runtime files, physics, level, audio or storage changes.
+- Source/build/offline verification and package provenance are recorded in `docs/v1.1-implementation-evidence.md`; independent acceptance, review and publication remain separate.
+
 ## 1.0.0 — 2026-10-23 (published)
 
 - Three authored side-scrolling routes: Lantern Rooftops, The Thirteenth Bell and Moonwake Gardens.
