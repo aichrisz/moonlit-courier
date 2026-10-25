@@ -41,28 +41,54 @@ for(const [width,height] of [[320,740],[844,390]])test(`mail-card content reacha
  await page.locator('#save-status').scrollIntoViewIfNeeded();await expect(page.locator('#save-status')).toBeVisible();
  await page.screenshot({path:`artifacts/v11/overlay-${width}x${height}.png`});
 });
-test('real Canvas uses four independent cached planes, stable pixels and bounded route cycling',async({page})=>{
+test('real Canvas preserves four parallax planes through one bounded smooth target blit',async({page})=>{
+ await page.addInitScript(()=>{
+  const native=document.createElement;const created=[];
+  document.createElement=function(...args){const e=native.apply(this,args);if(e instanceof HTMLCanvasElement)created.push(e);return e;};
+  window.__canvasAllocationAudit={created,restore:()=>{document.createElement=native;}};
+ });
  await setup(page);
  const r=await page.evaluate(()=>{
-  // This canvas and pure fixture are isolated from the private live controller.
-  const canvas=document.createElement('canvas'),ctx=canvas.getContext('2d'),images=new Set();let calls=[];
-  const native=ctx.drawImage.bind(ctx);ctx.drawImage=(image,...args)=>{images.add(image);calls.push({image:[...images].indexOf(image),x:args[0],w:image.width,h:image.height});native(image,...args);};
-  const g=MCEngine.createGame(),s=MCEngine.snapshot(g),before=JSON.stringify(s);
-  MCRenderer.draw(canvas,s,0,false);const a=calls;calls=[];
-  const moved=structuredClone(s);moved.player.x=930;MCRenderer.draw(canvas,moved,0,false);const b=calls;calls=[];
-  const pixels=canvas.toDataURL();MCRenderer.draw(canvas,moved,0,false);const stable=pixels===canvas.toDataURL();calls=[];
-  MCRenderer.draw(canvas,moved,0,true);const quiet=calls;calls=[];
-  const still=canvas.toDataURL();MCRenderer.draw(canvas,moved,20,true);const quietStable=still===canvas.toDataURL();calls=[];
-  for(let n=0;n<96;n++)MCRenderer.draw(canvas,MCEngine.snapshot(MCEngine.createGame(n%3)),0,false);
-  return {a,b,quiet,stable,quietStable,immutable:before===JSON.stringify(s),images:images.size};
+  // Observe actual Canvas resources and blits, not renderer helpers or live state.
+  const canvas=document.createElement('canvas'),images=new Set(),frames=[];let calls=[];
+  const proto=CanvasRenderingContext2D.prototype,native=proto.drawImage;
+  proto.drawImage=function(image,...args){
+   images.add(image);const x=args.length===8?args[4]:args[0];
+   calls.push({image:[...images].indexOf(image),target:this.canvas===canvas,x,w:image.width,h:image.height,smoothing:this.imageSmoothingEnabled});
+   return native.call(this,image,...args);
+  };
+  const paint=(s,t=0,reduced=false)=>{calls=[];MCRenderer.draw(canvas,s,t,reduced);frames.push(calls);return calls;};
+  try{
+   const s=MCEngine.snapshot(MCEngine.createGame()),before=JSON.stringify(s);
+   const a=paint(s);const moved=structuredClone(s);moved.player.x=930;const b=paint(moved);
+   const pixels=canvas.toDataURL();paint(moved);const stable=pixels===canvas.toDataURL();
+   const quiet=paint(moved,0,true),still=canvas.toDataURL();paint(moved,20,true);const quietStable=still===canvas.toDataURL();
+   for(let n=0;n<96;n++)paint(MCEngine.snapshot(MCEngine.createGame(n%3)));
+   const resources=window.__canvasAllocationAudit.created.filter(c=>c!==canvas).map(c=>({w:c.width,h:c.height,bytes:c.width*c.height*4}));
+   const world=document.querySelector('#world');
+   return {a,b,quiet,stable,quietStable,immutable:before===JSON.stringify(s),
+    planes:[...images].filter(c=>c.width===2048&&c.height===540).length,
+    targetBlits:frames.map(f=>f.filter(c=>c.target).length),smooth:frames.every(f=>f.every(c=>c.smoothing)),
+    resources,cacheBytes:resources.reduce((sum,c)=>sum+c.bytes,0),outputBytes:world.width*world.height*4};
+  }finally{proto.drawImage=native;window.__canvasAllocationAudit.restore();}
  });
- expect(r.a).toHaveLength(4);expect(new Set(r.a.map(p=>p.image)).size).toBe(4);
- expect(r.a.map(p=>p.image)).toEqual(r.b.map(p=>p.image));
- const shifts=r.b.map((p,i)=>p.x-r.a[i].x);expect(shifts[0]).toBe(0);expect(new Set(shifts).size).toBe(4);
- expect(shifts.slice(1).every(x=>x<0)).toBe(true);expect(r.quiet.every(p=>p.x===0)).toBe(true);
- expect(r.images).toBe(12);expect(r.a.every(p=>p.w<=2048&&p.h===540)).toBe(true);expect(r.stable).toBe(true);expect(r.immutable).toBe(true);
- expect(r.quietStable).toBe(true);
+ const planes=frame=>frame.filter(p=>p.w===2048&&p.h===540);
+ const a=planes(r.a),b=planes(r.b),quiet=planes(r.quiet);
+ expect(a).toHaveLength(4);expect(new Set(a.map(p=>p.image)).size).toBe(4);expect(a.map(p=>p.image)).toEqual(b.map(p=>p.image));
+ const shifts=b.map((p,i)=>p.x-a[i].x);expect(shifts).toEqual([0,-600*.09,-600*.23,-600*.41]);
+ expect(quiet).toHaveLength(4);expect(quiet.every(p=>p.x===0)).toBe(true);expect(r.planes).toBe(12);
+ expect(r.targetBlits.every(n=>n===1),JSON.stringify(r.targetBlits)).toBe(true);expect(r.smooth).toBe(true);
+ // 64 MiB RGBA backing budget includes every renderer-created canvas AND the DPR2 output.
+ // The isolated test target is excluded: production owns only #world.
+ expect(r.cacheBytes+r.outputBytes).toBeLessThan(64*1024*1024);expect(r.resources).toHaveLength(13);
+ expect(r.stable).toBe(true);expect(r.immutable).toBe(true);expect(r.quietStable).toBe(true);
  fs.writeFileSync('artifacts/v11/plane-probe.json',JSON.stringify(r,null,2));
+});
+test('narrow projection query is cached across paints and native orientation changes',async({page})=>{
+ await page.addInitScript(()=>{const native=window.matchMedia.bind(window);window.__narrowQueries=0;window.matchMedia=q=>{if(q==='(max-width:600px)')window.__narrowQueries++;return native(q);};});
+ await setup(page);await start(page);await page.clock.runFor(1000);
+ for(const width of [390,844,1366]){await page.setViewportSize({width,height:768});await page.clock.runFor(32);expect(await page.locator('#world').evaluate(c=>c.width/c.height)).toBeCloseTo(width<=600?4/3:16/9,2);}
+ expect(await page.evaluate(()=>window.__narrowQueries)).toBe(1);
 });
 for(const width of [1366,390])test(`native illustrated three-theme campaign ${width}`,async({page})=>{
  await page.setViewportSize({width,height:width===390?844:768});await setup(page);

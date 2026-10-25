@@ -1,0 +1,11 @@
+
+> moonlit-courier@1.1.0 test:browser
+> playwright test tests/e2e/polish.spec.cjs --grep real Canvas|narrow projection --workers=1
+
+
+Running 2 tests using 1 worker
+
+  ✓  1 tests/e2e/polish.spec.cjs:44:1 › real Canvas preserves four parallax planes through one bounded smooth target blit (2.4s)
+  ✓  2 tests/e2e/polish.spec.cjs:87:1 › narrow projection query is cached across paints and native orientation changes (4.5s)
+
+  2 passed (8.0s)

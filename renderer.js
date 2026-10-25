@@ -41,12 +41,16 @@
     return Object.freeze({capacity,observe,snapshot:()=>({particles:particles.map(p=>({...p})),landing})});
   }
   const backdrops = new Map();
+  // MediaQueryList is live: the browser updates .matches on resize/orientation.
+  // Keep one query rather than forcing style-query construction on every paint.
+  const narrowViewport=typeof root.matchMedia==='function'?root.matchMedia('(max-width:600px)'):null;
+  let stageBackdrop=null;
   function draw(canvas, s, seconds, reduced, feedback={particles:[],landing:0}) {
     const screen = canvas.getContext('2d');
     let c = screen;
     const dpr = Math.min(2, root.devicePixelRatio || 1);
     // Only the projection changes on a narrow device; world geometry stays frozen.
-    const viewWidth = root.matchMedia('(max-width:600px)').matches ? 720 : 960;
+    const viewWidth = narrowViewport && narrowViewport.matches ? 720 : 960;
     if (canvas.width !== viewWidth*dpr || canvas.height !== 540*dpr) {
       canvas.width = viewWidth*dpr; canvas.height = 540*dpr;
     }
@@ -133,7 +137,15 @@
     }
     c=screen;
     const factors=[0,.09,.23,.41];
-    backdrops.get(theme).forEach((plane,i)=>c.drawImage(plane,reduced?0:-camera*factors[i],0));
+    // Blend all four independently translated planes at authored resolution first.
+    // Only ONE smooth upscale reaches DPR2: four separate filtered upscales doubled
+    // software-raster frame cost. One reusable viewport buffer adds at most 2 MiB,
+    // unlike device-resolution caches which would quadruple the twelve-plane budget.
+    if(!stageBackdrop)stageBackdrop=document.createElement('canvas');
+    if(stageBackdrop.width!==viewWidth||stageBackdrop.height!==540){stageBackdrop.width=viewWidth;stageBackdrop.height=540;}
+    const scenery=stageBackdrop.getContext('2d',{alpha:false});
+    backdrops.get(theme).forEach((plane,i)=>scenery.drawImage(plane,reduced?0:-camera*factors[i],0));
+    c.drawImage(stageBackdrop,0,0);
     // Foreground world coordinates: solid ledges are visually outlined collision geometry.
     c.save();c.translate(-camera,0);
     for(const b of s.platforms){
