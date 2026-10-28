@@ -9,6 +9,7 @@
   let phase = 'ready', last = null, accumulator = 0;
   let keys = new Set(), edges = {jumpPressed:false,dashPressed:false};
   const canvas = $('world');
+  const feedback = MCRenderer.createFeedback();
   const audio = MCAudio.createAudio(globalThis,message=>{$('sound-status').textContent=message;});
   $('sound').addEventListener('change',()=>{void audio.enable($('sound').checked);});
   const moves = {ArrowLeft:'left',KeyA:'left',ArrowRight:'right',KeyD:'right',Space:'jump',KeyW:'jump',ArrowUp:'jump',ShiftLeft:'dash',ShiftRight:'dash',KeyX:'dash'};
@@ -44,9 +45,23 @@
     $('letters').textContent = `Post ${main} / 2 required`;
     $('bonus').textContent = `Scenic ${bonus} / 1 optional`;
     $('dash-status').textContent = p.dashReady ? 'Dash ready' : 'Dash spent';
+    // These slots describe collected IDs, not position or a guessed progress meter.
+    const required=s.level.letters.filter(l=>!l.optional);
+    for(const slot of document.querySelectorAll('[data-letter-slot]')){
+      const optional=slot.dataset.letterSlot==='optional';
+      const letter=optional?s.level.letters.find(l=>l.optional):required[Number(slot.dataset.letterSlot.at(-1))];
+      const collected=s.collected.includes(letter.id);
+      slot.dataset.collected=String(collected);
+      slot.setAttribute('aria-label',`${optional?'Scenic letter':'Required letter '+(required.indexOf(letter)+1)}: ${collected?'collected':'awaiting pickup'}`);
+    }
+    $('dash-meter').setAttribute('aria-valuenow',p.dashReady?'1':'0');
+    $('dash-meter').setAttribute('aria-valuetext',p.dashReady?'Ready; one air dash':'Spent; land to restore');
     $('elapsed').textContent = s.elapsed.toFixed(1)+'s';
     $('deaths').textContent = 'Returns '+s.deaths;
     const results = phase==='level-complete'||phase==='campaign-complete';
+    $('panel').dataset.phase=phase;
+    $('delivery-stamp').hidden=!results;
+    $('delivery-stamp').textContent=bonus?'PERFECT DELIVERY':'DELIVERED';
     $('panel').hidden = phase==='playing';
     for (const [id,show] of Object.entries({start:phase==='ready',resume:phase==='paused',restart:phase==='paused',next:phase==='level-complete',replay:phase==='campaign-complete',pause:phase==='playing',selection:phase==='ready'})) $(id).hidden=!show;
     if(phase==='ready') {
@@ -69,7 +84,8 @@
     select.value=String(s.levelIndex);
     const record=records.levels[s.levelIndex];
     $('record-summary').textContent=record.complete?`Best ${record.best.toFixed(1)}s · ${record.perfect?'perfect stamp':'delivered'}`:'No delivery record yet.';
-    MCRenderer.draw(canvas,s,s.elapsed,$('reduced-motion').checked);
+    feedback.observe(s,$('reduced-motion').checked);
+    MCRenderer.draw(canvas,s,s.elapsed,$('reduced-motion').checked,feedback.snapshot());
   }
   function completed() {
     try {
@@ -132,6 +148,8 @@
       while(accumulator+1e-9>=CONSTANTS.STEP && phase==='playing'){
         const held=[...[...keys].map(k=>moves[k]), ...[...pointers.values()].map(b=>b.dataset.input)];
         stepGame(game,{left:held.includes('left'),right:held.includes('right'),...edges},CONSTANTS.STEP);
+        // Presentation observes every true edge, including short events between paints.
+        feedback.observe(snapshot(game),$('reduced-motion').checked);
         edges={jumpPressed:false,dashPressed:false};accumulator-=CONSTANTS.STEP;
         for(const event of game.events)audio.play(event);
         if(game.events.includes('respawn'))release();
