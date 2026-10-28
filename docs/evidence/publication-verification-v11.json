@@ -1,0 +1,48 @@
+{
+  "base": "https://aichrisz.github.io/moonlit-courier/",
+  "release": "0108575bfbb3e3c44de557651f40cb26414abd7d",
+  "assets": {
+    "index.html": {
+      "public_bytes": 4790,
+      "release_bytes": 4790,
+      "match": true
+    },
+    "styles.css": {
+      "public_bytes": 8424,
+      "release_bytes": 8424,
+      "match": true
+    },
+    "levels.js": {
+      "public_bytes": 2751,
+      "release_bytes": 2751,
+      "match": true
+    },
+    "engine.js": {
+      "public_bytes": 6905,
+      "release_bytes": 6905,
+      "match": true
+    },
+    "records.js": {
+      "public_bytes": 3060,
+      "release_bytes": 3060,
+      "match": true
+    },
+    "renderer.js": {
+      "public_bytes": 17323,
+      "release_bytes": 17323,
+      "match": true
+    },
+    "audio.js": {
+      "public_bytes": 2604,
+      "release_bytes": 2604,
+      "match": true
+    },
+    "app.js": {
+      "public_bytes": 11096,
+      "release_bytes": 11096,
+      "match": true
+    }
+  },
+  "all_match": true,
+  "index_is_new_build": true
+}
