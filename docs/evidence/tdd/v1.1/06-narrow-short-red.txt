@@ -1,0 +1,89 @@
+
+> moonlit-courier@1.1.0 test:browser
+> playwright test tests/e2e/polish.spec.cjs --grep same-aspect arena|mail-card content|orientation changes --workers=1
+
+
+Running 16 tests using 1 worker
+
+  ✓   1 tests/e2e/polish.spec.cjs:50:81 › mail-card content reachable at 320x740 (24.0s)
+  ✓   2 tests/e2e/polish.spec.cjs:50:81 › mail-card content reachable at 844x390 (29.0s)
+  ✓   3 tests/e2e/polish.spec.cjs:50:81 › mail-card content reachable at 568x320 (23.9s)
+  ✓   4 tests/e2e/polish.spec.cjs:50:81 › mail-card content reachable at 600x400 (24.5s)
+  ✓   5 tests/e2e/polish.spec.cjs:50:81 › mail-card content reachable at 601x400 (29.1s)
+  ✓   6 tests/e2e/polish.spec.cjs:106:1 › narrow projection query is cached across paints and native orientation changes (4.4s)
+  ✓   7 tests/e2e/polish.spec.cjs:135:35 › same-aspect arena and reachable controls 1366x768 (2.1s)
+  ✓   8 tests/e2e/polish.spec.cjs:135:35 › same-aspect arena and reachable controls 320x740 (1.1s)
+  ✓   9 tests/e2e/polish.spec.cjs:135:35 › same-aspect arena and reachable controls 390x844 (1.2s)
+  ✓  10 tests/e2e/polish.spec.cjs:135:35 › same-aspect arena and reachable controls 768x1024 (1.8s)
+  ✓  11 tests/e2e/polish.spec.cjs:135:35 › same-aspect arena and reachable controls 1440x900 (2.3s)
+  ✓  12 tests/e2e/polish.spec.cjs:135:35 › same-aspect arena and reachable controls 844x390 (1.4s)
+  ✘  13 tests/e2e/polish.spec.cjs:135:35 › same-aspect arena and reachable controls 568x320 (1.0s)
+  ✘  14 tests/e2e/polish.spec.cjs:135:35 › same-aspect arena and reachable controls 600x400 (1.4s)
+  ✓  15 tests/e2e/polish.spec.cjs:135:35 › same-aspect arena and reachable controls 601x400 (1.4s)
+  ✓  16 tests/e2e/polish.spec.cjs:160:1 › orientation changes projection without restarting or stretching (1.9s)
+
+
+  1) tests/e2e/polish.spec.cjs:135:35 › same-aspect arena and reachable controls 568x320 ───────────
+
+    Error: expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 320
+    Received:    409.890625
+
+      151 |  expect(g.backing).toBeCloseTo(width<=600?720/540:960/540,2);expect(g.overflow).toBe(false);expect(g.top).toBeGreaterThanOrEqual(0);
+      152 |  expect(g.dpr).toBe(2);expect([g.backingWidth,g.backingHeight]).toEqual(width<=600?[1440,1080]:[1920,1080]);
+    > 153 |  expect(g.stage.top).toBeGreaterThanOrEqual(0);expect(g.stage.bottom).toBeLessThanOrEqual(height);expect(g.stage.left).toBeGreaterThanOrEqual(0);expect(g.stage.right).toBeLessThanOrEqual(width);
+          |                                                                       ^
+      154 |  expect(g.left).toBe(g.stage.left);expect(g.right).toBe(g.stage.right);expect(g.top).toBe(g.stage.top);expect(g.bottom).toBe(g.stage.bottom);
+      155 |  expect(g.buttons).toHaveLength(4);
+      156 |  for(const b of g.buttons){expect(b.w).toBeGreaterThanOrEqual(44);expect(b.h).toBeGreaterThanOrEqual(44);expect(b.top).toBeGreaterThanOrEqual(g.top+g.h);expect(b.bottom).toBeLessThanOrEqual(height);
+        at /root/projects/moonlit-courier/.worktrees/v1.1/tests/e2e/polish.spec.cjs:153:71
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/polish-same-aspect-arena-and-reachable-controls-568x320/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/polish-same-aspect-arena-and-reachable-controls-568x320/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/polish-same-aspect-arena-and-reachable-controls-568x320/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/polish-same-aspect-arena-and-reachable-controls-568x320/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/polish.spec.cjs:135:35 › same-aspect arena and reachable controls 600x400 ───────────
+
+    Error: expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 400
+    Received:    433.890625
+
+      151 |  expect(g.backing).toBeCloseTo(width<=600?720/540:960/540,2);expect(g.overflow).toBe(false);expect(g.top).toBeGreaterThanOrEqual(0);
+      152 |  expect(g.dpr).toBe(2);expect([g.backingWidth,g.backingHeight]).toEqual(width<=600?[1440,1080]:[1920,1080]);
+    > 153 |  expect(g.stage.top).toBeGreaterThanOrEqual(0);expect(g.stage.bottom).toBeLessThanOrEqual(height);expect(g.stage.left).toBeGreaterThanOrEqual(0);expect(g.stage.right).toBeLessThanOrEqual(width);
+          |                                                                       ^
+      154 |  expect(g.left).toBe(g.stage.left);expect(g.right).toBe(g.stage.right);expect(g.top).toBe(g.stage.top);expect(g.bottom).toBe(g.stage.bottom);
+      155 |  expect(g.buttons).toHaveLength(4);
+      156 |  for(const b of g.buttons){expect(b.w).toBeGreaterThanOrEqual(44);expect(b.h).toBeGreaterThanOrEqual(44);expect(b.top).toBeGreaterThanOrEqual(g.top+g.h);expect(b.bottom).toBeLessThanOrEqual(height);
+        at /root/projects/moonlit-courier/.worktrees/v1.1/tests/e2e/polish.spec.cjs:153:71
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/polish-same-aspect-arena-and-reachable-controls-600x400/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/polish-same-aspect-arena-and-reachable-controls-600x400/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/polish-same-aspect-arena-and-reachable-controls-600x400/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/polish-same-aspect-arena-and-reachable-controls-600x400/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/e2e/polish.spec.cjs:135:35 › same-aspect arena and reachable controls 568x320 ────────────
+    tests/e2e/polish.spec.cjs:135:35 › same-aspect arena and reachable controls 600x400 ────────────
+  14 passed (2.6m)

@@ -32,13 +32,32 @@ for(const scenic of [true,false])test(`truthful ${scenic?'perfect':'ordinary'} p
  await expect(page.locator('#save-status')).toBeVisible();await expect(page.locator('#save-status')).toContainText('Not saved');
  await page.screenshot({path:`artifacts/v11/result-${scenic?'perfect':'ordinary'}.png`});
 });
-for(const [width,height] of [[320,740],[844,390]])test(`mail-card content reachable at ${width}x${height}`,async({page})=>{
+// Visibility alone does not prove scrollable content escapes ancestor clipping.
+async function visibleIntersection(page,id){
+ await page.locator('#'+id).scrollIntoViewIfNeeded();
+ // Center through native scrolling rather than leave a fractional-pixel edge at
+ // the viewport boundary; the full-intersection assertions remain exact.
+ await page.locator('#'+id).evaluate(e=>e.scrollIntoView({block:'center',inline:'nearest'}));
+ const r=await page.locator('#'+id).evaluate(e=>{
+  const r=e.getBoundingClientRect(),panel=document.querySelector('#panel'),p=panel.getBoundingClientRect(),s=document.querySelector('.stage').getBoundingClientRect();
+  const left=Math.max(0,s.left,p.left+panel.clientLeft),top=Math.max(0,s.top,p.top+panel.clientTop);
+  const right=Math.min(innerWidth,s.right,p.left+panel.clientLeft+panel.clientWidth),bottom=Math.min(innerHeight,s.bottom,p.top+panel.clientTop+panel.clientHeight);
+  return {w:r.width,h:r.height,visibleW:Math.max(0,Math.min(r.right,right)-Math.max(r.left,left)),visibleH:Math.max(0,Math.min(r.bottom,bottom)-Math.max(r.top,top))};
+ });
+ expect(r.visibleW,id).toBeGreaterThan(0);expect(r.visibleH,id).toBeGreaterThan(0);
+ expect(r.visibleW,id).toBeCloseTo(r.w,3);expect(r.visibleH,id).toBeCloseTo(r.h,3);
+}
+for(const [width,height] of [[320,740],[844,390],[568,320],[600,400],[601,400]])test(`mail-card content reachable at ${width}x${height}`,async({page})=>{
  await page.setViewportSize({width,height});await setup(page);
  for(const id of ['start','level-select','save-status']){
   await page.locator('#'+id).scrollIntoViewIfNeeded();const r=await page.locator('#'+id).boundingBox();expect(r.x).toBeGreaterThanOrEqual(0);expect(r.x+r.width).toBeLessThanOrEqual(width);expect(r.height).toBeGreaterThan(0);
+  await visibleIntersection(page,id);
  }
- await start(page);await page.keyboard.press('Escape');await expect(page.locator('#resume')).toBeFocused();await page.locator('#restart').click();await page.clock.runFor(50);await delivery(page);
+ await start(page);await page.keyboard.press('Escape');await expect(page.locator('#resume')).toBeFocused();
+ for(const id of ['resume','restart'])await visibleIntersection(page,id);
+ await page.locator('#restart').click();await page.clock.runFor(50);await delivery(page);
  await page.locator('#save-status').scrollIntoViewIfNeeded();await expect(page.locator('#save-status')).toBeVisible();
+ for(const id of ['delivery-stamp','next','save-status'])await visibleIntersection(page,id);
  await page.screenshot({path:`artifacts/v11/overlay-${width}x${height}.png`});
 });
 test('real Canvas preserves four parallax planes through one bounded smooth target blit',async({page})=>{
@@ -112,26 +131,38 @@ for(const mode of ['keyboard','touch'])test(`real ${mode} air dash spends readin
  await page.clock.runFor(50);await expect(page.locator('#dash-status')).toHaveText('Dash spent');expect((await pos(page)).x-before.x).toBeGreaterThan(10);
  if(cdp)await cdp.send('Input.dispatchTouchEvent',{type:'touchCancel',touchPoints:[]});
 });
-const sizes=[[1366,768],[320,740],[390,844],[768,1024],[1440,900],[844,390]];
+const sizes=[[1366,768],[320,740],[390,844],[768,1024],[1440,900],[844,390],[568,320],[600,400],[601,400]];
 for(const [width,height] of sizes)test(`same-aspect arena and reachable controls ${width}x${height}`,async({page})=>{
  await page.setViewportSize({width,height});await setup(page);await start(page);
  await page.locator('.stage').evaluate(e=>e.scrollIntoView({block:'start'}));
  const g=await page.evaluate(()=>{
-  const c=document.querySelector('#world'),r=c.getBoundingClientRect();
-  return {box:r.width/r.height,backing:c.width/c.height,w:r.width,h:r.height,top:r.top,overflow:document.documentElement.scrollWidth>innerWidth,
-   buttons:[...document.querySelectorAll('.touch button')].map(b=>{const r=b.getBoundingClientRect();return {w:r.width,h:r.height,top:r.top,bottom:r.bottom};})};
+  const c=document.querySelector('#world'),r=c.getBoundingClientRect(),stage=document.querySelector('.stage').getBoundingClientRect();
+  return {box:r.width/r.height,backing:c.width/c.height,backingWidth:c.width,backingHeight:c.height,dpr:devicePixelRatio,w:r.width,h:r.height,top:r.top,left:r.left,right:r.right,bottom:r.bottom,
+   stage:{left:stage.left,right:stage.right,top:stage.top,bottom:stage.bottom,w:stage.width,h:stage.height},overflow:document.documentElement.scrollWidth>innerWidth,
+   buttons:[...document.querySelectorAll('.touch button')].map(b=>{const r=b.getBoundingClientRect();
+    const points=[[r.left+5,r.top+5],[r.right-5,r.top+5],[r.left+5,r.bottom-5],[r.right-5,r.bottom-5],[(r.left+r.right)/2,(r.top+r.bottom)/2]];
+    return {w:r.width,h:r.height,left:r.left,right:r.right,top:r.top,bottom:r.bottom,unobscured:points.every(([x,y])=>b.contains(document.elementFromPoint(x,y)))};
+   })};
  });
  const phase=process.env.POLISH_CAPTURE||'after';
  await page.screenshot({path:`artifacts/v11/${phase}-${width}x${height}.png`});
+ fs.writeFileSync(`artifacts/v11/${phase}-geometry-${width}x${height}.json`,JSON.stringify(g,null,2));
  expect(g.w).toBeGreaterThan(0);expect(g.h).toBeGreaterThan(0);expect(Math.abs(g.box-g.backing),JSON.stringify(g)).toBeLessThan(.02);
  expect(g.backing).toBeCloseTo(width<=600?720/540:960/540,2);expect(g.overflow).toBe(false);expect(g.top).toBeGreaterThanOrEqual(0);
- for(const b of g.buttons){expect(b.w).toBeGreaterThanOrEqual(44);expect(b.h).toBeGreaterThanOrEqual(44);expect(b.top).toBeGreaterThanOrEqual(g.top+g.h);expect(b.bottom).toBeLessThanOrEqual(height);}
+ expect(g.dpr).toBe(2);expect([g.backingWidth,g.backingHeight]).toEqual(width<=600?[1440,1080]:[1920,1080]);
+ expect(g.stage.top).toBeGreaterThanOrEqual(0);expect(g.stage.bottom).toBeLessThanOrEqual(height);expect(g.stage.left).toBeGreaterThanOrEqual(0);expect(g.stage.right).toBeLessThanOrEqual(width);
+ expect(g.left).toBe(g.stage.left);expect(g.right).toBe(g.stage.right);expect(g.top).toBe(g.stage.top);expect(g.bottom).toBe(g.stage.bottom);
+ expect(g.buttons).toHaveLength(4);
+ for(const b of g.buttons){expect(b.w).toBeGreaterThanOrEqual(44);expect(b.h).toBeGreaterThanOrEqual(44);expect(b.top).toBeGreaterThanOrEqual(g.top+g.h);expect(b.bottom).toBeLessThanOrEqual(height);
+  expect(b.left).toBeGreaterThanOrEqual(0);expect(b.right).toBeLessThanOrEqual(width);expect(b.unobscured).toBe(true);
+ }
 });
 test('orientation changes projection without restarting or stretching',async({page})=>{
  await setup(page);await start(page);const before=await pos(page);
- for(const [width,height] of [[390,844],[844,390],[1366,768]]){
+ for(const [width,height] of [[390,844],[844,390],[1366,768],[568,320],[600,400],[601,400],[600,400]]){
   await page.setViewportSize({width,height});await page.clock.runFor(32);
-  const r=await page.locator('#world').evaluate(c=>({box:c.clientWidth/c.clientHeight,back:c.width/c.height}));
+  const r=await page.locator('#world').evaluate(c=>({box:c.clientWidth/c.clientHeight,back:c.width/c.height,dimensions:[c.width,c.height]}));
   expect(Math.abs(r.box-r.back)).toBeLessThan(.02);expect(r.back).toBeCloseTo(width<=600?4/3:16/9,2);expect((await pos(page)).x).toBe(before.x);
+  expect(r.dimensions).toEqual(width<=600?[1440,1080]:[1920,1080]);
  }
 });

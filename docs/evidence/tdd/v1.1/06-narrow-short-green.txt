@@ -1,0 +1,25 @@
+
+> moonlit-courier@1.1.0 test:browser
+> playwright test tests/e2e/polish.spec.cjs --grep same-aspect arena|mail-card content|orientation changes --workers=1
+
+
+Running 16 tests using 1 worker
+
+  ✓   1 tests/e2e/polish.spec.cjs:50:81 › mail-card content reachable at 320x740 (24.2s)
+  ✓   2 tests/e2e/polish.spec.cjs:50:81 › mail-card content reachable at 844x390 (29.4s)
+  ✓   3 tests/e2e/polish.spec.cjs:50:81 › mail-card content reachable at 568x320 (23.9s)
+  ✓   4 tests/e2e/polish.spec.cjs:50:81 › mail-card content reachable at 600x400 (24.0s)
+  ✓   5 tests/e2e/polish.spec.cjs:50:81 › mail-card content reachable at 601x400 (29.1s)
+  ✓   6 tests/e2e/polish.spec.cjs:106:1 › narrow projection query is cached across paints and native orientation changes (4.3s)
+  ✓   7 tests/e2e/polish.spec.cjs:135:35 › same-aspect arena and reachable controls 1366x768 (2.1s)
+  ✓   8 tests/e2e/polish.spec.cjs:135:35 › same-aspect arena and reachable controls 320x740 (1.1s)
+  ✓   9 tests/e2e/polish.spec.cjs:135:35 › same-aspect arena and reachable controls 390x844 (1.2s)
+  ✓  10 tests/e2e/polish.spec.cjs:135:35 › same-aspect arena and reachable controls 768x1024 (1.8s)
+  ✓  11 tests/e2e/polish.spec.cjs:135:35 › same-aspect arena and reachable controls 1440x900 (2.3s)
+  ✓  12 tests/e2e/polish.spec.cjs:135:35 › same-aspect arena and reachable controls 844x390 (1.3s)
+  ✓  13 tests/e2e/polish.spec.cjs:135:35 › same-aspect arena and reachable controls 568x320 (1.0s)
+  ✓  14 tests/e2e/polish.spec.cjs:135:35 › same-aspect arena and reachable controls 600x400 (1.1s)
+  ✓  15 tests/e2e/polish.spec.cjs:135:35 › same-aspect arena and reachable controls 601x400 (1.2s)
+  ✓  16 tests/e2e/polish.spec.cjs:160:1 › orientation changes projection without restarting or stretching (1.9s)
+
+  16 passed (2.5m)

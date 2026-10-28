@@ -52,7 +52,7 @@ fieldset{border:0;padding:0;margin:0;display:flex;gap:14px;align-items:center;fl
 @media(max-width:600px){
  main{padding:10px 12px}.masthead{margin-bottom:6px}h1{font-size:26px}.eyebrow,.edition{font-size:8px}.route-heading{padding:4px 0;min-height:50px}.route-heading h2{font-size:18px}
  .hud{gap:6px 12px;flex-wrap:wrap;padding:4px 0 8px;font-size:10px}.post-group,.dash-group{gap:6px}.scenic{padding-left:10px}.envelopes{gap:4px}[data-letter-slot]{width:22px;height:16px}[data-letter-slot]::before{left:3px;width:14px;height:12px}#elapsed{margin-left:auto}#deaths{font-size:9px}
- .stage{width:100%;height:auto;aspect-ratio:4/3}canvas{aspect-ratio:4/3}
+ .stage{width:min(100%,calc((100vh - 100px)*4/3));width:min(100%,calc((100svh - 100px)*4/3));height:auto;aspect-ratio:4/3}canvas{aspect-ratio:4/3}
  .overlay{inset:0;width:100%;padding:17px 18px}.overlay h2{font-size:27px;margin:5px 0 8px}.overlay p:not(.eyebrow){font-size:11px;line-height:1.4;margin:3px 0 9px}.overlay #panel-kicker{font-size:8px}.overlay #save-status{font-size:10px;margin-top:8px;padding-top:6px}
  #selection{margin-top:8px;gap:5px}#selection select{font-size:11px}.actions{gap:5px}.actions button{padding:7px 10px;font-size:12px}#delivery-stamp{font-size:10px;padding:4px 8px;margin-bottom:4px}
  .touch button{min-width:48px;padding:6px 10px}.touch>div{gap:6px}.phase-line{font-size:10px}.colophon{display:none}fieldset{gap:4px 10px}#sound-status{flex-basis:100%}

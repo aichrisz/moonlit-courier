@@ -61,6 +61,8 @@
   "docs/evidence/tdd/v1.1/05-composite-green.txt",
   "docs/evidence/tdd/v1.1/05-composite-harness.txt",
   "docs/evidence/tdd/v1.1/05-composite-red.txt",
+  "docs/evidence/tdd/v1.1/06-narrow-short-green.txt",
+  "docs/evidence/tdd/v1.1/06-narrow-short-red.txt",
   "docs/implementation-checkpoint.md",
   "docs/implementation-evidence.md",
   "docs/superpowers/plans/2026-10-22-moonlit-courier.md",
